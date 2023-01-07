@@ -277,14 +277,102 @@ PARTIE B:
 
 B1) ![code de l'exo B10](./screen/B1/b1_code.png "code B1 ")
 
-Je commence par ouvrir mon fichier dans une variable nommé mon_image 
-Je crée un fonction pour tourner mon image:
-Je commence par copier mon image dans une variable nommé sortie 
+    Je commence par ouvrir mon fichier dans une variable nommé mon_image (ligne 3-5)
+    Je crée un fonction pour tourner mon image:
+    Je commence par copier mon image dans une variable nommé sortie (ligne 8)
 
-Puis je parcour les pixels de mon image i (avec mes deux boucle for). Je recupére le code rvb du pixel de mon image i et le stock dans la variable c (c pour couleur) avec c=i.getpixel((x,y))
-Puis je fait la transposé de mon image, c'est a dire que j'inverse les ligne et les colonnes pour obtenir l'image demandé. J'utilise cela pour ce faire sortie.putpixel((y,x),c) (je change le pixel de la position colonne ligne à la position ligne colonne). Je change donc les pixels de mon image de sortie.
-Puis j'enregistre ce fichier à la postion de sortie que l'utilisateur va indiquer (personnelement je l'enregistre dans le repertoire courant codeb2_et_image sous le nom de Imageou0.bmp)
+    Puis je parcour les pixels de mon image i (avec mes deux boucle for). (ligne 19-21)
+    Je recupére le code rvb du pixel de mon image i et le stock dans la variable c (c pour couleur) avec c=i.getpixel((x,y))
+    (ligne 22)
+
+    Puis je fait la transposé de mon image, c'est a dire que j'inverse les ligne et les colonnes pour obtenir l'image demandé. J'utilise cela pour ce faire sortie.putpixel((y,x),c) (je change le pixel de la position colonne ligne à la position ligne colonne). Je change donc les pixels de mon image de sortie. (ligne 25)
+
+    Puis j'enregistre ce fichier à la postion de sortie que l'utilisateur va indiquer (personnelement je l'enregistre dans le repertoire courant codeb2_et_image sous le nom de Imageou0.bmp)
+
+Voici l'image test de départ:
+
+![code de l'exo B1](./screen/B1/Imagetest_avant_code.png "image B1 avant le passage du code ")
+
+Voici la même image aprés le passage du code:
+
+![code de l'exo B1](./screen/B1/Imagetest_apres_code.png.png "image B1 apres le passage du code ")
 
 
-B2)
+## EXERCICE B2)
 
+![code de l'exo B2](./screen/B2/code_exo_B2.png "code B2 ")
+
+    Dans ce code je commence par ouvrir mon image à la ligne 3.
+
+    Pour faire ce qui est demandé je vais crée une fonction qui prend en parametre une image bmp et un chemin pour enregistrer la nouvelle image.
+    Je commence par copier mon image bmp (ligne 15) et j'enregistre le longueur de mon image dans une variable nommé width (ligne 16).
+    Ensuite je parcours mon image par c'est pixels. je récuper le code RVB dans la variable c (ligne 21) et je vais changée les pixels de la fin de ma ligne et sur la meme colonne par le pixels de la ligne du début.
+    
+    Exemple: si mon image fait 10 pixel de longueur je prend le premier pixel et dans mon image copier je change le 10éme  pixel par le premier que j'ai récuperer.
+    (le pixel 1 devient le pixel 10 dans mon image copie).
+
+Voici l'image de départ:  
+
+![code de l'exo B2](./codeB2_et_image/hall-mod_0.bmp "image avant le passage du code B2 ")
+
+Voici l'image obtenu aprés le code: 
+
+![code de l'exo B2](./codeB2_et_image/Imageout1.bmp "image apres le passage du code B2 ")
+
+## EXERCICE B3)
+![code de l'exo B3](./screen/B3/code_b3.png "code B3 ")
+
+    J'ouvre mon image à la ligne 3.
+
+    Je vais crée une fonction niveau de gris pour faire ce qui est demandé.
+    A cette fonction nous allons lui attribué deux parmaétre celui de l'image dans une varable nommé i et un chemin pour le repertoire de sortie.
+
+    Dans cette fonction je commence par copié mon image dans une variable nommé sortie. (à la ligne 13)
+    Puis je parcours mon image i et je récupere le code rvb de chacun des pixels dans une variable c.( ligne 17-18)
+
+    Pour mettre un pixel en niveau de gris nous allons utilisé la formule donné qui est : (rouge + vert + bleu)/3
+    Dans la ligne 19 j'utilise cette formule est je le met dans une variable nv_col.
+
+    Puis dans le copie je change le code RVB des pixels par le code RVB que j'ai obtenu avec le niveau de gris.
+
+Voici mon image de départ: 
+
+![code de l'exo B3](./codeB2_et_image/IUT-Orleans.bmp "image avant le passage du code B3 ")
+
+Voici l'image aprés le code:
+
+![code de l'exo B3](./codeB2_et_image/Imageout2.bmp "image apres le passage du code B3 ")
+
+Nous pouvons bien voir que nos pixels sont grisé.
+
+## EXERCICE B4)
+
+![code de l'exo B4](./screen/B4/code_b4.png "code B4 ")
+
+    J'ouvre l'image demandé.
+    
+    Pour mettre mon image en noir et blanc je commence par crée une fonction qui prend deux parametre: l'image et le repertoire de sortie.
+
+    Par la suite je copie mon image (ligne 13)
+
+    Je parcour mon image et je prend le code RVB dans une variable c.
+
+    La formule pour mettre le pixel en noir ou en blanc c'est:
+    (Rouge² + Vert² + Bleu²), c'est notre ligne 19 et on le met dans une variable nommé nv_col.
+    Ensuite on verifie si nv_col est supérieur à 255*255*3/2
+    alors le pixel sera blanc et on va le changer (ligne 21).
+    Sinon le pixel sera noir et on va le changer (ligne 23).
+
+    Ps: si le pixel est blanc son code RVB est: 255, 255, 255
+    si le pixel est noir son code RVB est: 00, 00, 00.
+
+
+Voici mon image de départ: 
+
+![code de l'exo B4](./codeB2_et_image/IUT-Orleans.bmp "image avant le passage du code B4 ")
+
+Voici l'image aprés le code:
+
+![code de l'exo B4](./codeB2_et_image/Imageout3.bmp "image apres le passage du code B4 ")
+
+## EXERCICE B5)
