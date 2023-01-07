@@ -262,7 +262,16 @@ A10)
 
 Et nous allons obtenir cette image:
 
-![image de l'exo A10](./screen/A10//A10_imagefin.png "image A10 ")
+![image de l'exo A10](./screen/A10/A10_imagefin.png "image A10 ")
+
+    Dans la seconde partie de l'exercice il nous est demandé de supprimé les couleurs inutiles dans la palette de couleur est de l'enregistrer dans un fichier nommé Image 9.bmp
+    Notre image 8 fait 1114 octet lorsque nous supprimons les couleurs inutiles dans la palette Il ne reste plus que 106 octets.
+
+![image de l'exo A10](./screen/A10/A10_part2.png "comparaison de taille aprés avoir enlever les couleurs de la palette ")
+
+    voici à quoi resemble le fichier okteta de l'image 9 avec une palette trés réduite:
+![image de l'exo A10](./screen/A10/A10_part2_okteta_image9.png "fichier okteta de l'image 9.bmp ")
+
 
 PARTIE B:
 
@@ -275,3 +284,7 @@ Je commence par copier mon image dans une variable nommé sortie
 Puis je parcour les pixels de mon image i (avec mes deux boucle for). Je recupére le code rvb du pixel de mon image i et le stock dans la variable c (c pour couleur) avec c=i.getpixel((x,y))
 Puis je fait la transposé de mon image, c'est a dire que j'inverse les ligne et les colonnes pour obtenir l'image demandé. J'utilise cela pour ce faire sortie.putpixel((y,x),c) (je change le pixel de la position colonne ligne à la position ligne colonne). Je change donc les pixels de mon image de sortie.
 Puis j'enregistre ce fichier à la postion de sortie que l'utilisateur va indiquer (personnelement je l'enregistre dans le repertoire courant codeb2_et_image sous le nom de Imageou0.bmp)
+
+
+B2)
+
