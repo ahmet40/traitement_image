@@ -7,7 +7,9 @@
     Voici comment lire une adresse dans un fichier okteta:
 ![code de l'image de l'exo A0](./screen/A0/okteta_imageExemple.png "apprendre à lire une adresse")
 
-    Les chiffres marqué à gauche sont les adresses. Donc 0000: 0000 est l'adresse 0x00 à cette adresse nous retrouverons l'octet 42. l'octet suivant est: 4D sont adresse est: 0x01
+
+
+    Les chiffres marqué à gauche sont les adresses. Donc 0000: 0000 est l'adresse 0x00 à cette adresse nous retrouverons l'octet qui a pour valeur 42. l'octet suivant est: 4D sont adresse est: 0x01
     
     De la même maniere les valeurs 0000: 0010 correspond à l'adresse 0x10 à cette adresse nous trouverons l'octet 00.
     Les deux octets suivant sont 00 80 cela correspond à l'adresse 0x11 et l'adresse 0x12.
@@ -163,17 +165,17 @@ convert Image0.bmp bmp3:Image1.bmp
 
 ## EXERCICE A4:
     
-    1) Il n'y a qu'un seul bits utilisé.
+    1) Il y'a 8 bits utilisé par pixel soit un octet.
 
-    2)1 seul bits est utilisés donc il vaut 1 octet.
+    2)la taille des donnés pixels est de 16 octet. 
 
-    3) Il n'y a pas de compressions utilisé car lorsque nous regardons l'adresse 0x1E nous pouvons voir que sur 4 bits nous avons que des 0 donc l'image n'a pas subit une compression.
+    3) Il n'y a pas de compressions utilisé car lorsque nous regardons l'adresse 0x1E nous pouvons voir que sur 4 octets nous avons que des 0 donc l'image n'a pas subit une compression.
 
-    4) Les couleurs de la palettes sont codés sur 4 bits. En effet le premier bits correspond à la couleur bleu. Le deuxiéme à la couleur vert et le troisiéme à la couleurs rouge (en tenant compte de l'endiannes). Le dérnier octet est un octet réserver.
+    4) Les couleurs de la palettes sont codés sur 4 octets. En effet le premier octet correspond à la couleur bleu. Le deuxiéme à la couleur vert et le troisiéme à la couleurs rouge (en tenant compte de l'endiannes). Le dérnier octet est un octet réserver.
 
-    5) à l'adresse 0x2E est indiqueé sur 4 bits combien de couleur la palette contient ici elle vaut 2. Donc dans cette palette nous avons deux couleurs.
+    5) à l'adresse 0x2E est indiqueé sur 4 octets combien de couleur la palette contient ici elle vaut 2. Donc dans cette palette nous avons deux couleurs.
 
-    6)Oui les pixels sont maintenant codés sur 1 bits 
+    6)Oui le codage des pixels sont maintenant codés sur 1 octet. 
 
     7)
 ![image de l'exo A4](./screen/A4/A4_7/A4_7_okteta.png " le fichier okteta de l'image de l'exo A4_7") 
@@ -485,7 +487,7 @@ Voici l'image aprés le code libere:
 
 A l'oeil nu l'Humain ne voit aucune différence entre ces deux images.
 
-## Partie 2:
+### Partie 2:
 
     Dans cette partie je vait utiliser le code cacher pour cacher une image dans un autre.
 
@@ -516,7 +518,7 @@ Voici l'image de fin:
 Vous ne voyez toujours pas de différence à l'oeil nu attendez la paartie 3 pour voir ce qu'il y a dans cette image.
 
 
-## Partie 3:
+### Partie 3:
 
 Dans cette partie je vait utiliser la fonction trouver: 
 ![code de l'exo B5](./screen/B5/fonction_trouver.png "code trouver")
@@ -542,3 +544,196 @@ Et voici l'image qui était cacher à l'interieur:
 ![code de l'exo B5](./codeB2_et_image/ImageB5_qui_etait_cacher.bmp "image apres le code de la fonction cacher une image")
 
 Maintenant à l'oeil nu nous pouvons voir ce qui était cacher.
+
+# Partie B Bonus:
+
+## EXERCICE B6)
+
+    Dans cette exercice il nous est demandé de caché du texte dans une image.
+    Au début npous commençons par faire les même fonction que l'exercice B5.
+    Nous allons copier les fonctions cacher, trouver et libere_place.
+    La fonction liber place permet de degrader le pixel rouge d'un chiffre si il est impaire.
+
+
+![code de l'exo B6](./screen/B6/meme_code_b5.png "image des codes que l'on va reutiliser")
+
+    J'ai enregistrer le fichier avec la couleur rouge degrader sous le nom de: Image_steg_out0_partie_b6.bmp
+    J'ai crée une fonction pour cacher mon image.
+    J'ai diviser cette fonction en deux partie:
+
+![code de l'exo B6](./screen/B6/cacher_text_part1.png "Image du code ccher_texte partie 1")
+
+    Dans cette partie du code je commence par parcourir mes lettre dans mon mot que je vais cache. 
+    Avec la ligne 3: "".join("{:08b}".format(ord(lettre)))
+    Il permet de mettre une lettre du mot en binaire sur 1 octet dans une chaine de caractere (la fonction ord permet de mettre une lettre en decimal avec la table ASCII). Puis avec la ligne 4 je place chaque bit dans la liste.
+    Voici La partie une ce code.
+![code de l'exo B6](./screen/B6/cacher_text_part2.png "Image du code ccher_texte partie 2")
+
+    Dans cette partie je parcour mon image avec un degrader de couleur rouge, je recupere chaque pixel dans une variable.
+    Si le chiffre de ma liste de binaire vaut 1 alors je le cache dans la couleur rouge de mon image avec un nombre imapire.
+    Sinon je le cache avec nombre pair.
+    Puis dans mon dernier if, verifie que je ne sorte pas de la liste pour ne pas savoir d'erreur. Si j'attent le dernier bit de ma liste alors j'enregistre mon fichier de sortie et je quitte ma fonction.
+    J'enregistre se fichier sous le nom de Image_steg_out1_partie_b6.bmp
+
+
+
+
+Voici mon code en entier:
+![code de l'exo B6](./screen/B6/cacher_text.png "Image du code cacher_texte")
+
+J'appel cette fonction de cette maniere.
+
+![code de l'exo B6](./screen/B6/enregistrment_cacher_texte.png "Image du code cacher_texte")
+
+    Voici mon code pour retrouver mon image:
+
+![code de l'exo B6](./screen/B6/fonction_retrouver_image.png "Image du code retrouver_texte")
+
+    Dans cette fonction je commence par parcourir mon image et récuperer le code RVB de chaque pixel dans une variable.
+    Puis je verifie avec la fonction trouver (qui à été donné) si le pixel est impair ou pair (si il vaut 0 ou 1) et je l'ajoute dans une liste.
+    Une fois avoir atteint 1 octet je parcours ma liste. Pour chaque 1 dans ma liste je le convertit en decimal.
+    Une fois avoir eu tout les bit de ma liste je convertit mon nombre decimal en une lettre ASCII (grace à la fonction chr).
+    Et j'affiche ce resultat.
+
+
+Le mot que j'ai caché est: Bonus
+
+Voici l'image avant tout modification:
+
+![code de l'exo B6](./codeB2_et_image/hall-mod_0.bmp "mot que l'on a caché")
+
+
+Voici l'image aprés le degrader de couleur rouge:
+
+![code de l'exo B6](./codeB2_et_image/Imageout_steg_0.bmp "mot que l'on a caché")
+
+
+Voici l'image dans lequel nous avons caché le texte:
+
+![code de l'exo B6](./codeB2_et_image/Imageout_steg_out1_partie_b6.bmp "mot que l'on a caché")
+
+
+Voici le message que j'ai retrouver (c'est le même que j'ai caché):
+
+![code de l'exo B6](./screen/B6/message_cache.png "mot que l'on a caché")
+
+
+## EXERCICE B7)
+
+    Le chiffrement de VERNAM est dit incassable car l'être humain ne peut pas deviner la clef de chiffrement. Si elle essayer toute les possibilités de clefs de chiffrement ils pourrait obtenir des milliers de mots différents et de clef different qui existeront. Or malgrés la difficulté de craqué le code de VERNAM, il existe un seul moyen de le faire. Pour le craqué il faudrait connaitre la clef de chiffrement.
+
+    Chiffrons ensemble le mot archiimage avec la clé zskjltubsy qui à été choisis de façon aleatoire et qui est aussis long que le mot à cacher.  (Si l'addition des deux lettres ne dépassent pas 26 il n'est pas necessaire de le mettre modulo 26):
+
+    a=0     z=25
+    r=17    s=18
+    c=2     k=10
+    h=7     j=9
+    i=8     l=11
+    i=8     t=19
+    m=12    u=20
+    a=0     b=1
+    g=6     s=18
+    e=4     y=24
+
+    a+z = 0+25 = 25 = z           
+    r+s = 17+18 = 35 % 26 = 9 = j
+    c+k = 2+10 = 12 = m
+    h+j = 7+9 = 16 = q
+    i+l = 8+11 = 19 = t
+    i+t = 8+19 = 27% = 1 = b
+    m+u = 12+20 =  32%26 = 6 = g
+    a+b = 0+1 = 1 = b
+    g+s = 6+1 = 7 = y
+    e+y = 4+24 = 28%26 = 2 = c
+
+    notre mot chiffré est: zjmqtbgbyc
+
+## Exercice B8)
+
+    Dans ces conditions que penser de l'usage massif de la surveillance du net dans l'espoir d'empêcher des groupes illégaux de communiquer de façon discrète et secrète? 
+
+    Sachant que le code de VERNAME est presque impossible à craquer sans la clef de chiffrement si de plus nous mettons ce texte dans une image cela ne fait que renforcer la securite et permet au groupes illégaux de communiquer de façon trés secrète. Donc je pense que la surveillance massif du net n'empechera pas les groupes illégaux de communiquer en toutes discretions. 
+    
+
+    Pour cette question j'ai repris les codes de la question B6 et j'ai rajouté le code de VERNAME.
+
+    Voici mon code de vername: 
+
+![code de vernam](./screen/B8/code_vernam.png)
+
+    Je commence par crée une fonction dans laquelle je demande à l'utilisateur d'entrer son mot à cacher.
+    Par la suite je crée un dictionnaire dans lequelle les clé sont les lettre de l'alphabet et les valeur leur indices (exemple la a à pour indice le 0, le b c'est le 1 ...). Ensuite je parcours mon mot à cacher et pour chaque lettre je demande à l'ordinateur de me donner une lettre de la table ASCII et je met cette lettre en petit car il peut donner aussi des grandes lettre (ligne 13-15).
+
+    Puis je reparcours mon mot (ligne 19). J'additionne l'indice de la lettre du mot avec celle de la cle et je met cette valeur modulo 26 et j'obtient l'indice de ma future lettre(ligne 22-23) . 
+    Ensuite je parcour mon dictionnaire de lettre et je prend la lettre qui correspond à l'indice que j'ai calculé juste avant et j'arrete le parcour de mon dictionnaire. 
+    Pour finir je retourne mon nouveau mon et ma clef qui va me permettre de retrouver mon mot.
+
+    Voici ce que le code de vername donne pour cacher le mot planterunefleur: 
+
+![test du code vernam avec le mot planterunefleur](./screen/B8/test_code_vernam.png)
+
+
+    Nous pouvons voir que j'ai appelé ma fonction deux fois et que j'ai eu deux mot different car j'utiliser bien des clef aléatoire.
+
+    Pour la suite je reutilise les deux code libere_place et cacher_texte de la question B6:
+    Nous rappelons que le code liberer_place permet de degrader un pixel de couleur rouge à un chiffre paire en dessous et que le code cacher_texte permet de placer le texte dans une image.  
+
+    Voici le code liberer_place et celui de cacher_texte:
+
+![code liberer_place](./screen/B8/code_liber_place.png)
+
+![code cacher_texte](./screen/B8/code_cacher_texte.png)
+
+    Maintenant mon mot avec le code de VERNAM est caché dans l'image comment faire pour le retrouver ? Pour le retrouver nous allons modifié un tout petit peut le code de retrouver texte de la question B6.
+
+    Voici le code:
+
+![code retrouver_texte](./screen/B8/code_retrouver_texte.png)
+
+    Voici la ligne de code qui change par rapport à la question B6:
+
+![ligne qui le differencie de la question B6](./screen/B8/ligne_qui_change_retrouver_texte.png)
+
+    Nous pouvons voir que dans cette ligne j'appele la fonction qui va nous permettre de retrouver le mot de depart grace à sa clef. Si je n'appele pas cette fonction le code va me retourner le mot qui à été code avec VERNAME.
+
+    Voici le code qui va me permet donc de retrouver le mot de départ:
+
+![code pour retrouver le message de depart](./screen/B8/code_retrouver_vernam.png)
+
+    La difference qui nous permet de retrouver le mot de départ est la ligne: 38 car au lieu d'additionner les valeurs je les soustrait pour obtenir la lettre du mot de depart.
+    
+    Ceci est donc le code de la fonction qui nous permet de retrouver notre texte de départ.
+
+
+    Voici le test que j'ai mis en place pour savoir si mon code fonctionne:
+
+![test de tout les code de cette exercice](./screen/B8/test_general.png)
+
+    Je commence par appeler ma fonction liberer place (qui degrade la couleur rouge) sur l'image du hall de l'iut et j'enregistre cette nouvelle image sous le nom du fichier imageout_steg0_partie_b8.bmp (ligne 124).
+
+    Par la suite je vait demander à l'utilisateur d'entrer le mot qu'il veut cacher. Je vais recuperer le nouveau mot apres le passage du code de VERNAME et la clef qui lui a permit d'être codée. J'affiche le nouveau mot et la clef qui ma premit de le coder (ligne 126-129).
+
+    Ensuite j'ouvre l'image ou j'ai degrader la couleur rouge.
+    J'appele ma fonction cacher_texte qui va me permettre de placer le nouveau mot dans l'image et je vais enregistrer cette nouvelle image sous le nom de imageout_steg1_partie_b8.bmp (ligne132-133).
+
+    Et pour finir j'appel ma fonction retrouver_texte_cacher qui va me permettre de retrouver mon mot de depart(ligne136).
+    Je fini par afficher le mot de départ avec un petit texte.
+
+        Voici le resultat:
+
+![resultat test final](./screen/B8/resultat_test_final.png)
+
+       Vous pouvez voir que mon mot de depart est: architropbien
+
+       Le mot apres le code de VERNAME est : bbjgemjbgffxr ( c'est ce mot que nous placons dans l'image)
+       
+       la clef de chiffrement est bkhzwtsnrexte
+
+
+       le mot retrouver est: architropbien
+
+       Et nous retrouvons bien le mot de départ grace à la fonction retouver text image et la fonction retrouver texte VERNAME.
+
+
+## EXERCICE B9)
+
