@@ -5,7 +5,7 @@
     Dans cette SAE nous allons avoir besoin d'un editeur hexadecimale: okteta et d'un utilitaire (de la suite logicielle ImageMagick) très commode que nous utiliserons par la suite dans ce devoir: display
 
     Voici comment lire une adresse dans un fichier okteta:
-![code de l'image de l'exo A0](./screen/A0/okteta_imageExemple.png "apprendre à lire une adresse")
+![apprendre à lire une adresse](./screen/A0/okteta_imageExemple.png)
 
 
 
@@ -21,114 +21,115 @@
 
 ### Partie 1: 
 
-![code de l'image de l'exo A0](./screen/A0/okteta_imageExemple.png "code de l'image de l'exo A0")
+![code de l'image de l'exo A0](./screen/A0/okteta_imageExemple.png )
 
-![code de l'image de l'exo A0](./screen/A0/le_type_de_fichier.png "Le type de fichier A0")
+![Le type de fichier A0](./screen/A0/le_type_de_fichier.png )
 
-    Ces deux premiers octets que nous pouvons lire dans ce fichier sont 42 4D codé en hexadécimal, cela correspond au type de fichier que nous sommes en train d’analyser (42 et 4D represente dans la table ASCII les lettres BM). Dans notre cas cela signifie donc que c’est un fichier BMP (image). 
+    Ces deux premiers octets que nous pouvons lire dans ce fichier sont 42 4D codé en hexadécimal, cela correspond au type de fichier que nous sommes en train d’analyser (42 et 4D représente dans la table ASCII les lettres BM). Dans notre cas cela signifie donc que c’est un fichier BMP (image). 
 
-![code de l'image de l'exo A0](./screen/A0/taille_fichier.png "La taille de fichier A0")
+![La taille de fichier A0](./screen/A0/taille_fichier.png)
 
-    Ces quatre octets suivants correspond à la taille du fichier. Ici la taille est représenter en little indian, il faut donc inverser les octets (donc 99 73 0C 00 va devenir 00 0C 73 99 ) lorsqu’on le calcule, cela nous donne 816 025 octets ce qui est la taille de notre fichier.
+    Ces quatre octets suivants correspondent à la taille du fichier. Ici la taille est représenter en little endian, il faut donc inverser les octets (donc 99 73 0C 00 va devenir 00 0C 73 99 ) lorsqu’on le calcule, cela nous donne 816 025 octets ce qui est la taille de notre fichier.
 
-![code de l'image de l'exo A0](./screen/A0/champs_reserver.png "Les champs resever de l'en-tete")
+![Les champs resever de l'en-tete](./screen/A0/champs_reserver.png)
     
-    Les quatre octets suivant sont des champs réserver. (il valent 00 00 00 00).
+    Les quatre octets suivants sont des champs réserver. (ils valent 00 00 00 00).
 
-![code de l'image de l'exo A0](./screen/A0/debut_pixel.png "Adresse ou l'on commence à coder les pixel") 
+![Adresse ou l'on commence à coder les pixel](./screen/A0/debut_pixel.png ) 
     
-    Puis les quatre octets suivant correspond à l’adresse de la zone de définition de l’image, donc à cette adresse commence le codage des pixels. Il vaut: 00 00 00 1A en tenant compte de l’indiannes (dans okteta cela est noter 1A 00 00 00).
+    Puis les quatre octets suivants correspondent à l’adresse de la zone de définition de l’image, donc à l'adresse 0x1A commencent le codage des pixels. Il vaut: 00 00 00 1A en tenant compte de l’endiannes.
     
-![code de l'image de l'exo A0](./screen/A0/entete_bmp.png "en-tete du fichier bmp")   
+![en-tete du fichier bmp](./screen/A0/entete_bmp.png )   
     
     Tout ceci est l’en-tête du fichier Bmp que nous sommes en-train d’analyser. Il est codé sur 14 octets.
 
 #
  
 
-    Maintenant nous allons analyser l’en-tête du bitmap. Sur 4 octets se trouve la taille en octets de cet en-tête, dans ce fichier cela correspond à (0C 00 00 00) mais nous devons l’inverser car ,nous somme en little indian donc cela devient (00 00 00 0C) qui vaut 11.
+    Maintenant nous allons analyser l’en-tête du bitmap.
+    Sur 4 octets nous trouvons la taille en octets de cet en-tête. Dans ce fichier cela correspond à (0C 00 00 00).
+    Sachant que nous sommes toujours en little endian nous devons inverser l'ordre des octets, cela devient (00 00 00 0C) qui vaut 12 octets. Donc la taille de l'en-tête du bitmap vaut 12 octets.
 
-![code de l'image de l'exo A0](./screen/A0/largeur_fichier.png "La largeur du ficheir") 
+![La largeur du fichier](./screen/A0/largeur_fichier.png ) 
 
-    Les 4 octets suivants sont la largeur de l’image en pixels, (80 02 A9 01) qui vaut 01 A9 02 80 = 27 853 440 pixels.
-    (Pour le calculer nous faisons: 0+ 8*16 + 2*16² + 0 + 9*16⁴ + 10*16⁵ + 1*16⁶ + 0)
+    Les 4 octets suivants sont la largeur de l’image en pixels, (80 02 A9 01). 01 A9 02 80 (en tenant compte de l'endiannes)= 27 853 440 pixels.
+    (Pour le calculer nous faisons: 0 + 8*16 + 2*16² + 0 + 9*16⁴ + 10*16⁵ + 1*16⁶ + 0). Donc notre fichier a 27 853 440 pixels de largeur.
 
-![code de l'image de l'exo A0](./screen/A0/hauteur_fichier.png "La hauteur du ficheir")
+![La hauteur du fichier](./screen/A0/hauteur_fichier.png )
 
-    Les 4 octets suivants (01 00 18 00) sont la hauteur de l’image en pixels.  00 18 00 01 = 1 572 865   Donc notre image a une hauteur de 1 572 865 pixels.
+    Les 4 octets suivants (01 00 18 00) sont la hauteur de l’image en pixels.  00 18 00 01 = 1 572 865. Donc notre image a une hauteur de 1 572 865 pixels.
     (Pour le calculer nous faisons: 1*16⁰ + 8*16⁴ + 1*16⁵)
 
-    Les octets suivants sont les octets de l’image rapellons nous qu’à 0x1A nous obtenons  l’adresse de la zone de définition de l’image et nous y sommes arriver nous sommes à l’adresse 1A.
+    Les octets suivants sont les octets de l’image rapellons nous qu’à l'adresse 0x1A nous obtenons l’adresse de la zone de définition de l’image et nous y sommes arrivé nous sommes à l’adresse 0x1A.
 
 ### Partie2:
 
-![code de l'image de l'exo A0](./screen/A0/taille_fichier.png "La taille de A0")
+![La taille de A0](./screen/A0/taille_fichier.png )
 
     Lorsque nous affichons l’image avec la commande display, nous obtenons une erreur. Cela est du à la taille du fichier. En effet dans le fichier la taille entrer est de  00 0C 73 99 qui vaut 816 025 octets.
 
 
-    Alors que lorsque nous faisons ls -l  pour avoir la taille du fichier dans le terminale cela nous donne  816 026.
+    Alors que lorsque nous faisons ls -l dans le terminal pour voir la taille du fichier cela nous indique 816 026.
     
-![code de l'image de l'exo A0](./screen/A0/la_taille_provoque_erreur.png "La taille de A0 dans le terminal")    
+![La taille de A0 dans le terminal](./screen/A0/la_taille_provoque_erreur.png )    
     
     Ce problème est du au fait que nous oublions de calculer l’octet à l’adresse 0. 
-    Expemple: de 0 à 5 il y a 5 valeur 1, 2, 3, 4 et 5 cela est compter par ce que l’on entre dans le fichier tandis que dans le terminal et pour la taille du fichier il faut compter de 0 à 5 nous trouvons donc les valeurs 0, 1, 2, 3, 4 et 5). 
+    Expemple: de 0 à 5 il y a 5 valeurs: 1, 2, 3, 4 et 5 cela est compter par ce que l’on entre dans le fichier tandis que dans le terminal et pour la taille du fichier il faut compter de 0 à 5 nous trouvons donc les valeurs: 0, 1, 2, 3, 4 et 5. 
 
-    Pour résoudre se problème nous devons donc ajouter 1 à 816 025 et le traduire en hexadecimal. Cela nous donne donc : 00 0C 73 9A. Sachant que nous devons entrer cette valeur en little endian nous allons inverser les octets, cela va nous donne 9A 73 0C 00. Maintenant nous pouvons entrer cette nouvelle valeur à la place de l’ancienne et le probléme sera résolu.
+    Pour résoudre se problème nous devons donc ajouter 1 à 816 025 et le traduire en hexadécimal. Cela nous donne donc: 00 0C 73 9A. Sachant que nous devons entrer cette valeur en little endian nous allons inverser les octets, cela va nous donner 9A 73 0C 00. Maintenant nous pouvons entrer cette nouvelle valeur à la place de l’ancienne et le problème sera résolu.
 
 Dans l'en-tête du fichier nous allons donc obtenir: 
-![code de l'image de l'exo A0](./screen/A0/nouvelle_taille_fichier_exemple.png "La nouvelle taille")
+![La nouvelle taille](./screen/A0/nouvelle_taille_fichier_exemple.png )
 
- Et voici donc la nouvelle en-tet que nous avons: 
-![code de l'image de l'exo A0](./screen/A0/Nouvelle_entete.png "La nouvelle en-tete")
+ Voici donc la nouvelle en-tête que nous avons: 
+![La nouvelle en-tete](./screen/A0/Nouvelle_entete.png )
 
 
 ## EXERCICE A1:
 
-![code de l'image de l'exo A1](./screen/A1/A1_okteta.png "code de l'image de l'exo A1") 
+![code de l'image de l'exo A1](./screen/A1/A1_okteta.png ) 
 
-    L'en-tête du fichier est donné dans la consigne. Nous allon donc détailler directement le contenu.
+    L'en-tête du fichier nous est donné dans la consigne. Nous allons donc détailler directement le contenu.
 
 
-![code de l'image de l'exo A1](./screen/A1/pixel_couleur_rouge.png "Le premier pixel de couleur rouge")    
+![Le premier pixel de couleur rouge](./screen/A1/pixel_couleur_rouge.png )    
 
-    Le premier pixel de notre fichier commence à l'adresse 0x1A et il représente le pixel en bas à gauche, ce pixel est codé sur 3 octets. un octet pour la couleur bleu allant de 0 à 255, un octet pour vert allant de 0 à 255 et un octet pour le rouge allant de 0 à 255 (en tenant compte de l'endian car si on ne tient pas compte de l'endianesse on obtient Rouge, Vert, Bleu). Sachant que ce pixel doit être de couleur rouge nous auront  00 00 FF (qui represente le rouge et qui est codé en hexadecimal) (FF=255)
+    Le premier pixel de notre fichier commence à l'adresse 0x1A et il représente le pixel en bas à gauche. Ce pixel est codé sur 3 octets, un octet pour la couleur bleu allant de 0 à 255, un octet pour vert allant de 0 à 255 et un octet pour le rouge allant de 0 à 255 (en tenant compte de l'endian car si on ne tient pas compte de l'endianesse on obtient Rouge, Vert, Bleu). Sachant que ce pixel doit être de couleur rouge nous auront  00 00 FF (qui représentent le rouge et qui est codé en hexadecimal) (FF=255)
 
     
-![code de l'image de l'exo A1](./screen/A1/pixel_couleur_blanc.png "Le pixel de couleur blanc") 
+![Le pixel de couleur blanc](./screen/A1/pixel_couleur_blanc.png ) 
 
-    le second pixel est de couleur blanche donc nous auront FF FF FF. Nous allons continuer à codé comme cela j'usqu'à ce que nous arrivons au dernier pixel du fichier qui se trouve en haut à droite.
+    Le second pixel est de couleur blanche donc nous aurons FF FF FF. Nous allons continuer à coder comme cela j'usqu'à ce que nous arrivons au dernier pixel du fichier qui se trouve en haut à droite.
 
 
 
 
 Notre Première image va donc resembler à ça:
 
-![image de l'exo A1](./screen/A1/A1_image_rendu.png "image de l'exo A1") 
+![image de l'exo A1](./screen/A1/A1_image_rendu.png ) 
 
 
 ## EXERCICE A2:
 
-![code de l'image de l'exo A2](./screen/A2/A2_okteta.png "fichier vu sous okteta de l'image A2") 
+![code de l'image de l'exo A2](./screen/A2/A2_okteta.png ) 
 
-    L'en-tête du fichier est donné dans la consigne. Nous allon  donc détailler directement le contenu.
+    L'en-tête du fichier est la même que l'exercice 1, il n'y a que la taille du fichier qui change. Nous allons  donc détailler directement le contenu.
 
     Le premier pixel de notre fichier commence à l'adresse 0x1A et il représente le pixel en bas à gauche, ce pixel est codé sur 3 octets. un octet pour la couleur bleu allant de 0 à 255, un octet pour vert allant de 0 à 255 et un octet pour le rouge allant de 0 à 255 (en tenant compte de l'endian si nous l'on n'en tient pas compte l'ordre n'est pas inverser et donc nous obtenons du Rouge puis du Vert puis du bleu).
     
 
-Sachant que ce pixel doit être de couleur cyan nous auront  FF FF 00(qui represente le cyan et qui est codé en hexadecimal le code rvb du cyan est donné dans le site ) (FF=255). 
+    Sachant que ce pixel doit être de couleur cyan nous auront  FF FF 00(qui represente le cyan et qui est codé en hexadecimal le code rvb du cyan est donné dans le site sur le pdf de la SAE) (FF=255). 
 Dans le fichier okteta il ressemble à sa:
 ![code de l'image de l'exo A2](./screen/A2/pixel_couleur_cyan.png "Le pixel de couleur cyan") 
 
-    Le second pixel est de couleur magenta donc nous auront FF 00 FF (ce pixel est codé de la même maniere que le premier nous remplaçons seulement le code rvb).
+    Le second pixel est de couleur magenta donc nous aurons FF 00 FF (ce pixel est codé de la même manière que le premier, nous remplaçons seulement le code rvb).
 Dans le fichier okteta il ressemble à sa:
 ![code de l'image de l'exo A2](./screen/A2/pixel_couleur_magenta.png "Le pixel de couleur magenta") 
     
     
-    Nous allons continuer à code comme  en donnant le code rvb du pixel que l'on veut cela jusqu'a arriver au dernier pixel du fichier qui se
-    trouve en haut à droite.
+    Nous allons continuer à coder comme sa en donnant le code rvb du pixel que l'on veut cela jusqu'a arriver au dernier pixel du fichier qui se trouve en haut à droite.
 
-    Dans ce fichier il y a les couleurs:(je vais donné les code rvb et l'adresse ou il aparaissent).
+    Dans ce fichier il y a les couleurs (je vais donné les code rvb et l'adresse ou il aparaissent):
     cyan : FF FF 00 (adresse: 0x1A)
     magenta: FF 00 FF (adresse: 0x1D)
     bleu céruléen: E8 9D 0F (adresse: 0x20)
@@ -139,23 +140,31 @@ Dans le fichier okteta il ressemble à sa:
 
     Notre Image va donc resembler à ça:
 
-![image de l'exo A2](./screen/A2/A2_image_rendu.png "image de l'exo A2") 
+![image de l'exo A2](./screen/A2/A2_image_rendu.png ) 
 
 
 
+## A partir de maintenant tout les fichier sont en little endian 
 
 ## EXERCICE A3:
     
 Commande à utiliser pour la suite de notre exercice et qui va nous donner une nouvelle façon de coder:
 convert Image0.bmp bmp3:Image1.bmp
 
-    0) Nous somme passe d'un fichier de 74 octets à 102. Le calcule est fait de cette maniére, nous faisons 74-12 (on enleve le poid du codage du BITMAPCOHEADER)
+Voici le fichier vu sous okteta:
+
+![code du fichier A3](./screen/A3/fichier_okteta.png ) 
+
+    0) Nous sommes passé d'un fichier de 74 octets à 102. Le calcule est fait de cette manière, nous faisons 74-12 (on enléve le poid du codage du BITMAPCOHEADER)
     donc 62+40 = 102 
     (40 est le poid du codage en BITMAPINFOHEADER)
 
-    1) On utilise 24 bits par pixels. Soit 3 octets.
+![bit par pixel](./screen/A3/nombre_bit_pixel.png )
+
+    1) A l'adresse 0x1C nous pouvons voir le nombre de bits utilisé pour coder un pixel. On peut voir que nous utilisons 24 bits par pixels(00 18 = 8+1*16=24). Cela correspond à 3 octets. 
     
-    2) Pour la taille des donnés pixels il faut faire le nombre de pixels * le nombre d'octet par pixel. Dans notre fichier nous avons 4 pixels par ligne et 4 colonnes donc 4*4=16 et nous utilisont 3 octets par pixels. Donc 16*3=48. Nous avons donc 48 octets de donnés pixels.
+    2) Pour calculer la taille des donnés pixels il faut faire, le nombre de pixels * le nombre d'octet par pixel. Dans notre fichier nous avons 4 pixels par ligne et 4 colonnes donc 4*4=16 et nous utilisont 3 octets par pixels. Donc 16*3=48. Nous avons donc 48 octets de donnés pixels. 
+    Nous pouvons aussi le voir à l'adresse 0x22 sur 4 octets. Il vaut 00 00 00 30 soit 3*16=48 octets de donnés pixels.
 
     3)Il n'y a pas de compressions utilisé car lorsque nous regardons l'adresse 0x1E nous pouvons voir que sur 4 bits nous avons que des 0.Ce qui nous indique bien que l'image n'a pas subit une compression.
 
@@ -164,67 +173,88 @@ convert Image0.bmp bmp3:Image1.bmp
 
 
 ## EXERCICE A4:
+
+![code de l'image 2](./screen/A4/A4_1/fichier_okteta.png )
     
-    1) Il y'a 8 bits utilisé par pixel soit un octet.
+![nombre de bit utiliser](./screen/A4/A4_1/bitpixel.png )
 
-    2)la taille des donnés pixels est de 16 octet. 
+    1) A l'adresse 0x1C sur 2 octets nous pouvons voir les valeurs 00 01. Cela nous indique qu'il y'a 1 bits utilisé par pixel.
 
-    3) Il n'y a pas de compressions utilisé car lorsque nous regardons l'adresse 0x1E nous pouvons voir que sur 4 octets nous avons que des 0 donc l'image n'a pas subit une compression.
+![les donnés pixels](./screen/A4/A4_1/doneepixel.png )
 
-    4) Les couleurs de la palettes sont codés sur 4 octets. En effet le premier octet correspond à la couleur bleu. Le deuxiéme à la couleur vert et le troisiéme à la couleurs rouge (en tenant compte de l'endiannes). Le dérnier octet est un octet réserver.
+    2)La taille des donnés pixels est de 16 octets. Nous pouvons le voir à l'adresse 0x22 sur 4 octets. 
 
-    5) à l'adresse 0x2E est indiqueé sur 4 octets combien de couleur la palette contient ici elle vaut 2. Donc dans cette palette nous avons deux couleurs.
+    3) Il n'y a pas de compressions utilisé car lorsque nous regardons l'adresse 0x1E nous pouvons voir que sur 4 octets nous avons que des 0. Donc l'image n'a pas subit une compression.
 
-    6)Oui le codage des pixels sont maintenant codés sur 1 octet. 
+    4) Les couleurs de la palettes sont codés sur 4 octets. En effet le premier octet correspond à la couleur bleu. Le deuxième à la couleur vert et le troisième à la couleurs rouge (en tenant compte de l'endiannes). Le dérnier octet est un octet réserver.
+
+    5) A l'adresse 0x2E est indiqueé sur 4 octets combien de couleur la palette contient. Ici elle vaut 00 00 00 02. Donc dans cette palette nous avons deux couleurs.
+
+    6)Oui le codage des pixels à changé ils sont maintenant codés sur 1 bit. 
 
     7)
-![image de l'exo A4](./screen/A4/A4_7/A4_7_okteta.png " le fichier okteta de l'image de l'exo A4_7") 
+![ le fichier okteta de l'image de l'exo A4_7 avant le changement](./screen/A4/A4_1/fichier_okteta.png ) 
 
-    Ceci est le fichier que l'on a ouvert avec okteta. Dans ce fichier vous pouvez voir à l'adresse 0x36 les valeurs FF 00 00(sur 3 octets). 
+    Ceci est le fichier que l'on a ouvert avec okteta avant tout changement. Dans ce fichier vous pouvez voir à l'adresse 0x36 les valeurs 00 00 00 FF(sur 4 octets) qui coresspondent à la couleur rouge (A cette adresse nous sommes dans la palette de couleur. Donc nous allons changer la couleur dans la palette). Donc il suffit de mettre à cette adresse les valeurs FF 00 00 00 pour obtenir du bleu. 
+    Voici le nouveau fichier vu sous okteta:
 
-![image de l'exo A4](./screen/A4/A4_7/A4_7_lesoctets.png "les octets changer")
-    
-    L'octet suivant vaut 00 est il est reserver.
-    Cela corresepond à la couleur blue. En effet pour avoir la couleur rouge il y avait les valeurs 00 00 FF et nous les avons remplacer par les valeurs de la couleur bleu.
-    Notre fichier ressemble donc à sa:  
 
-![image de l'exo A4](./screen/A4/A4_7/A4_7_imagedonne.png "image de l'exo A4_7 l'image obtenu")
+![le fichier okteta de l'image de l'exo A4_7 avant le changement](./screen/A4/A4_7/A4_7_okteta.png)
+
+
+ET voici le resultat:
+
+![image de l'exo A4_7 l'image obtenu](./screen/A4/A4_7/A4_7_imagedonne.png )
      
     8) 
-![image de l'exo A4](./screen/A4/A4_8/A4_8_okteta.png "le fichier okteta de l'image A4 8")
+![le fichier okteta de l'image A4 8](./screen/A4/A4_8/A4_8_okteta.png )
     
-    Voici le fichier vu sous okteta. Nous utilisons les même couleur que pour la question précedente donc nous avons pas besoin de changer les couleurs de la palette. Or nous allons inverser l'odre des couleurs, pour ce faire tout les 4 octets les valeurs 50 00 00 00 deviendront A0 00 00 00 et les valeurs A0 00 00 00 deviendront 50 00 00 00. Voici la difference:
-![image de l'exo A4](./screen/A4/A4_8/A4_7_8dernieroctets.png "Les 8 derniers octets de l'image A4 7") Ceci correspond au 8 derniers octets de l'image precedente
+    Voici le fichier vu sous okteta. Nous utilisons les mêmes couleurs que pour la question précedente donc nous avons pas besoin de changer les couleurs de la palette.
+    Or nous allons inverser l'odre des couleurs, pour ce faire tout les 4 octets les valeurs 50 00 00 00 deviendront A0 00 00 00 et les valeurs A0 00 00 00 deviendront 50 00 00 00. Voici la difference:
+![Les 8 derniers octets de l'image A4 7](./screen/A4/A4_8/A4_7_8dernieroctets.png )
+ Ceci correspond au 8 derniers octets de l'image precedente
 
-![image de l'exo A4](./screen/A4/A4_8/A4_8_8dernieroctets.png "Les 8 derniers octets de l'image A4 8") Ceci correspond au 8 derniers octets de l'image actuelle.
+![Les 8 derniers octets de l'image A4 8](./screen/A4/A4_8/A4_8_8dernieroctets.png ) Ceci correspond au 8 derniers octets de l'image actuelle.
 
-Vous pouvez donc bien voir que nous inversons l'ordre tout les 4 octets pour obtenir l'image.
+    Vous pouvez donc bien voir que nous inversons l'ordre tout les 4 octets pour obtenir l'image demandé.
 
-![image de l'exo A4](./screen/A4/A4_8/A4_8_imagedonne.png "image de l'exo A4_8 l'image obtenu")
+![image de l'exo A4_8 l'image obtenu](./screen/A4/A4_8/A4_8_imagedonne.png )
 
     9)
 
-![image de l'exo A4](./screen/A4/A4_9/a4_9_okteta.png "image A4 9 vu sous l'editeur okteta") Voici notre image vu sous l'editeur okteta.
+![image A4 9 vu sous l'editeur okteta](./screen/A4/A4_9/a4_9_okteta.png ) 
+
+    Voici notre image vu sous l'editeur okteta.
     ET maintenant voici notre image vu avec Imagemagick:
 
-![image de l'exo A4](./screen/A4/A4_9/A4_9_imageobtenu.png "image A4 9 ")  
+![image de l'exo A4_9](./screen/A4/A4_9/A4_9_imageobtenu.png )  
 
     10)
     Voici notre logo ouvert avec okteta aprés être passé en mode index de couleurs:
 
-![image de l'exo A4](./screen/A4/A4_10/A4_10_okteta.png "image okteta A4 10 ") 
+![image de l'exo A4_10](./screen/A4/A4_10/A4_10_okteta.png) 
 
 
 
-    11) On peut le trouver à l'adresse 0x2E sur 4 bits donc il vaut 00 00 00 10 (en little endian). Donc dans cette palette nous pouvons trouver 16 couleurs.(1*16=16)
+    11) On peut le trouver à l'adresse 0x2E sur 4 octets donc il vaut 00 00 00 10 (en little endian). Donc dans cette palette nous pouvons trouver 16 couleurs.(1*16=16)
 
-    12) Il se trouvent à l'adresse 0x66 sur 4 bits. Il est codés sur 3 bits donc il vaut FE FE FD avec le bit reserve qui vaut 00.
+    12) Il se trouvent à l'adresse 0x66 sur 4 octets. Il est codés sur 3 octets donc il vaut FE FE FD avec l'octet reserve qui vaut 00.
 
-    13) Le tableau de pixel commence à l'adresse 0x76.
+    13) Le tableau de pixel commence à l'adresse 0x76. Cette adresse est donné à l'adresse 0x0A sur 4 octets.
 
-    14)
+    
+    15) Lorsque l'on diminue le nombre de couleurs dans la palette l'image est plus pixelisé. 
+
+    Voici se à quoi elle ressemble:
+
+![image de l'exo A4_15](./screen/A4/A4_15/image_donne.png) 
 
 
+    Voici le fichier vu sous okteta:
+
+![image de l'okteta A4_15](./screen/A4/A4_15/okteta.png) 
+
+    Nous pouvons voir que le codage des pixels à changé. Nous codons sur 4 bits (obtenu à l'adresse 0x1C). Les valeurs du codage des pixels à aussi changé.
 
 
 
@@ -234,134 +264,171 @@ Vous pouvez donc bien voir que nous inversons l'ordre tout les 4 octets pour obt
     
     2) Si nous passons la valeur de la hauteur de l'image à une valeur négatif ce-dernier inversera l'image voici notre imgage de départ:
      
-![image de l'exo A5](./screen/A5/A5_imagedepart.png "image A5 au départ ")
-![image de l'exo A5](./screen/A5/A5_imagefin.png "image A5 au fin ")
+![image depart exo A5 2](./screen/A5/A5_imagedepart.png )
+![image fin exo A5 2](./screen/A5/A5_imagefin.png )
 
-    Voici la différence entre notre premiére image qui a une hauteur positf et la deuxieme une hauteur négatif. Pour ce faire nous codons la, valeur -4 en complement à 2 (le C2) et nous allons changer la valeur dans le fichier okteta. -4 vaut FC FF FF FF en C2. 
+    Pour ce faire nous codons la, valeur -4 en complément à 2 (le C2) et nous allons changer la valeur dans le fichier okteta. -4 vaut FC FF FF FF en C2. En effet 00 00 00 04 ( valeur de la hauteur) vaut en binaire 0000 0000 0000 0000 0000 0000 0000 0100. Pour coder cela en C2 il faut inverser les bits à partir du premier un (le 0 devient un 1 et le 1 devient un 0).
+    -4 vaut en C2: 1111 1111 1111 1111 1111 1111 1111 1100 = FF FF FF FC. Sachant que nous sommes en little endian, on doit inverser et on obtient: FC FF FF FF.
 
-![image de l'exo A5](./screen/A5/A5_okteta.png "image A5 okteta ")
+![image de l'exo A5 2](./screen/A5/A5_okteta.png )
 
-    La valeur entouré represente le -4. Au depart elle valait 04 00 00 00 (pour la valeur 4). 
+    La valeur entouré représente le -4. Au depart elle valait 04 00 00 00 (pour la valeur 4). 
 
-    3) Lorsque nous avons fini de mettre la valeur de la hauteur en négatif nous obtenons:
-![image de l'exo A5](./screen/A5/A5_logo_image.png "image A5_3")
+    3) Lorsque nous avons finis de mettre la valeur de la hauteur en négatif nous obtenons:
+![image de l'exo A5 3](./screen/A5/A5_logo_image.png )
 
-Voici les changement sur le fichier okteta (nous avons passer la hauteur de l'image en négatif, en le codant en C2.)
+    Voici le changement sur le fichier okteta (nous avons passer la hauteur de l'image en négatif, en le codant en C2). La valeur de la hauteur est de 57 FE FF FF. Au depart elle valait 00 00 01 A9 en binaire 0000 0000 0000 0000 0000 0001 1010 1001. On inverse à partir du premier 1 et on obtient : 1111 1111 1111 1111 1111 1110 0101 0111 qui vaut FF FF FE 57.
 
-![image de l'exo A5](./screen/A5/A5_logo_okteta.png "image A5_3 okteta ")
+![okteta de l'exo A5 3](./screen/A5/A5_logo_okteta.png )
 
 ## EXERCICE A6)
-    1) Le nouveaux fichier vaut 1120 octets. Il y a une palette de couleur qui contient 16³ couleurs. C'est pourquoi la taille de notre image a augmenter.
 
-    2) Il est donnée à l'adresse 0x0A est il renvoie à l'adresse 0x436 ou les couleur de l'image débute.
-
-    3) Les pixels sont codés sur deux bits le premier bit correspond au nombre de pixel que l'on va colorier et le second bit correspond à la couleur dans la palette. 
+Voici l'image etudier:
     
-![image de l'exo A5](./screen/A6/A6_couleurrouge.png "image des pixels de l'image A6 ") 
+![image 4 ](./screen/A6/image4.png ) 
+
+    1) Le nouveaux fichier vaut 1120 octets. Il y a une palette de couleur qui contient 16³ couleurs. C'est pourquoi la taille de notre image a augmenter. De plus nous codons les pixels un par un (l'explication est faite dans la question 3) ce type de codage n'est pas adapté au fichier ce qui augmente aussi sa taille.
+
+    2) Il est donnée à l'adresse 0x0A est il renvoie à l'adresse 0x436 ou les couleur de l'image débute. L'adresse du debut des pixels est trés loin car il y a beaucoup de couleur dans la palette.
+
+    3) Les pixels sont codés sur deux octets le premier octet correspond au nombre de pixel que l'on va colorier et le second octet correspond à la couleur dans la palette. 
+    
+![pixel rouge A6 ](./screen/A6/A6_couleurrouge.png ) 
     
 
-Le premier bit (il se trouve à l'adresse 0x436) vaut 01 cela veut dire que l'on va colorier 1 pixel, le second bit vaut 00 cela correspond à la couleur rouge dans notre palette. Donc nous avons notre premier pixel de couleur rouge. 
+    Le premier octet (il se trouve à l'adresse 0x436) vaut 01 cela veut dire que l'on va colorier 1 pixel, le second octet vaut 00 cela correspond à la couleur rouge dans notre palette. Donc nous avons notre premier pixel de couleur rouge. 
     
-![image de l'exo A5](./screen/A6/A6_couleurblanc.png "image des pixels de l'image A6 ") 
+![pixel blanc A6 ](./screen/A6/A6_couleurblanc.png ) 
     
-Les deux bits suivants vaut 01 01 cela veut dire que l'on va avoir un pixel de couleur blanc (01 coresspond a la couleur blanche).  
+    Les deux octet suivants vaut 01 01 cela veut dire que l'on va avoir un pixel de couleur blanc (01 coresspond a la couleur blanche).  
 
-Une fois que nous avons codés notre premiére ligne nous devont faire un saut, pour ce faire nous entrons sur deux bit 00 00.Dec cette maniére: ![image de l'exo A5](./screen/A6/A6_fin_de_ligne.png "image des pixels de l'image A6 ")
+    Une fois que nous avons codés notre première ligne nous devont faire un saut, pour ce faire nous entrons sur deux octet 00 00. De cette maniére: 
+![oktet fin de ligne](./screen/A6/A6_fin_de_ligne.png )
 
-Et pour finir le fichier nous entrerons les valeurs 00 01 pour signaler que c'est la fin du bitmap (du fichier).
+    Et pour finir le fichier nous entrerons les valeurs 00 01 pour signaler que c'est la fin du bitmap (du fichier).
     
 
 
 A7)
     
-    1) L'image vaut 1102 octets. Dans l'image 5 la première ligne est codé de la même façon que l'image 4, or les 3 autres lignes sont codé differament. En effet sur ces 3 lignes nous avons que des pixels rouge donc nous indiquons sur le premier bit le nombre de pixels qu'il y a sur la ligne et sur le deuxieme bit sa couleur. Donc nous gagnons énormement de place car nous codons pas tout les pixels une par une (comme c'est le cas dans l'image 4). C'est pour cela que l'image 5 est moin grand que l'image 4.
+Voici l'image étudié:
+
+![image 5](./screen/A7/image.png )
+
+    1) L'image 5 vaut 1102 octets. Dans l'image 5 la première ligne est codé de la même façon que l'image 4, or les 3 autres lignes sont codé différament. En effet sur ces 3 lignes nous avons que des pixels rouge donc nous indiquons sur le premier octet le nombre de pixels qu'il y a sur la ligne et sur la deuxième sa couleur. Donc nous gagnons énormement de place car nous codons pas tout les pixels une par une (comme c'est le cas dans l'image 4). C'est pour cela que l'image 5 est moin grand que l'image 4.
 
     2)
-    Les pixels sont codés sur deux bits le premier bit correspond au nombre de pixel que l'on va colorier et le second bit correspond à la couleur dans la palette. 
-![image de l'exo A7](./screen/A7/A7_couleurblanc.png "image des pixels de l'image A7 ") 
-    Le premier bit (à l'adresse 0x436) vaut 01 cela veut dire que l'on va colorier 1 pixel, le second bit vaut 01 cela correspond à la couleur blanche.
+    Les pixels sont codés sur deux octets le premier octet correspond au nombre de pixel que l'on va colorier et le second correspond à la couleur dans la palette. 
+![pixel blanc](./screen/A7/A7_couleurblanc.png ) 
+
+    Le premier octet du fichier se trouve à l'adresse 0x436 et elle vaut 01 cela veut dire que l'on va colorier 1 pixel, le second octet vaut 01 cela correspond à la couleur blanche.
     Donc nous avons notre premier pixel de couleur blanche. 
     
-![image de l'exo A7](./screen/A7/A7_couleurrouge.png "image des pixels de l'image A7 ")
-    Les deux bits suivants vaut 01 00 cela veut dire que l'on va avoir un pixel de couleur rouge (00 coresspond a la couleur rouge). 
+![pixel rouge](./screen/A7/A7_couleurrouge.png )
 
-![image de l'exo A7](./screen/A7/A7_fin_de_ligne.png "image des pixels de l'image A7 ")
-    Une fois que nous avons codés notre premiére ligne nous devont faire un saut, pour ce faire nous entrons sur deux bit 00 00. 
+    Les deux octets suivants vaut 01 00 cela veut dire que l'on va avoir un pixel de couleur rouge (00 coresspond a la couleur rouge). 
+
+![fin de ligne](./screen/A7/A7_fin_de_ligne.png )
+
+    Une fois que nous avons codés notre première ligne nous devont faire un saut, pour ce faire nous entrons sur deux octets les valeurs 00 00. 
     
-![image de l'exo A7](./screen/A7/A7_unelignederouge.png "image des pixels de l'image A7 ")
+![une ligne de rouge](./screen/A7/A7_unelignederouge.png )
+
     Ensuite pour les 3 autre lignes ont indique que l'on va colorier 4 pixels de couleur rouge et faire un saut de ligne. Donc nous entrons 04 00 00 00 (04 00 veut dire 4 pixels de couleur rouge et 00 00 veut dire le saut de ligne).
 
 
 ## EXERCICE A8)
 
-![image de l'exo A8](./screen/A8/A8_fichier_okteta.png "okteta de l'image A8 ")
+![image okteta A8](./screen/A8/A8_fichier_okteta.png )
 
-Les 6 premiers bit de l'image correspond à la palette de couleur (00 00 00 00 00 00 ).
-Ensuite nous pouvons voir que nous commençons par mettre deux pixels blanc avec(02 01) un pixel rouge (01 00) et un autre pixel blanc (00 01) puis nous faison un saut de ligne (00 00) puis nous mettons la ligne en rouge (04 00) en saute une ligne (00 00) puis nous remettons la ligne en rouge (04 00) en saute une ligne (00 00) et sur la dernière ligne on met un pixel blanc (01 01) puis un pixel rouge(01 00) un pixel blanc (01 01) et un dernier pixel rouge (01 00) et ,ous fermons le fichier avec (00 00 00 01).
+    Les 6 premiers octet de l'image correspond à la palette de couleur (00 00 00 00 00 00 ).
+
+    Ensuite nous pouvons voir que nous commençons par mettre deux pixels blanc avec (02 01), un pixel rouge (01 00) et un autre pixel blanc (00 01).
+    Puis nous faisons un saut de ligne (00 00).
+    Nous mettons la ligne en rouge (04 00), en saute une ligne (00 00).
+    Nous remettons la ligne en rouge (04 00), en saute une ligne (00 00).
+    Et sur la dernière ligne on met un pixel blanc (01 01) puis un pixel rouge(01 00), un pixel blanc (01 01) et un dernier pixel rouge (01 00) et nous fermons le fichier avec (00 00 00 01).
 
 Et nous obtenons: 
 
-![image de l'exo A8](./screen/A8/A8_imageobtenu.png "de l'image A8 ")
+![image de l'exo A8](./screen/A8/A8_imageobtenu.png )
 
 ## EXERCICE A9)
 
-Pour commencer nous allons rejouter des couleurs dans notre palette.
+    Pour commencer nous allons rajouter des couleurs dans notre palette.
 
-![image de l'exo A9](./screen/A9/A9_palette.png "palette de l'image A9 ")
+![image palette A9](./screen/A9/A9_palette.png )
 
-couleur dans la palette:
-    rouge (00 00 FF) 
-    blanc (FF FF FF)
-    bleu  (FF 00 00)
-    vert  (00 FF 00)
+    couleur dans la palette: 
+        les couleurs commence à partir du 7éme octet.
+        rouge (00 00 FF) + un octet reservé
+        blanc (FF FF FF) + un octet reservé
+        bleu  (FF 00 00) + un octet reservé
+        vert  (00 FF 00) + un octet reservé
 
-![image de l'exo A9](./screen/A9/A9_okteta_code.png "okteta de l'image A9 ")
+Voici le codage des pixels vu par okteta:
 
-Le fichier est code de la même maniere que le fichier 8 sauf que lorsque nous avons une ligne verte nous mettons les valeur 04 03 comme ceci:
-![image de l'exo A9](./screen/A9/A9_vert.png "pixel vert A9 ")
+![okteta A9](./screen/A9/A9_okteta_code.png )
 
-et le pixel bleu nous mettons 01 02 comme ceci:
-![image de l'exo A9](./screen/A9/A9_bleu.png "pixel bleu A9 ")
+    Le fichier est code de la même maniere que le fichier 8 sauf que lorsque nous avons une ligne verte nous mettons les valeur 04 03 comme ceci:
+![ligne vert ](./screen/A9/A9_vert.png )
 
-Nous obtenons cette image:
+    et pour les pixel bleu nous mettons 01 02 comme ceci:
+![pixel bleu](./screen/A9/A9_bleu.png )
 
-![image de l'exo A9](./screen/A9/A9_imagefin.png "image A9 ")
+    Nous obtenons cette image:
+
+![image de l'exo A9](./screen/A9/A9_imagefin.png )
 
 ## EXERCICE A10)
 
     Pour cette image la palette de couleur est la même que pour la question précédente.
     Or le changement est fait dans le code:
 
-![image de l'exo A10](./screen/A10/A10_code.png "code image A10 ")
+Voici le codage des pixel vu par okteta:
+
+![image code A10](./screen/A10/A10_code.png )
 
     Pour mettre la valeur rouge on entre 00 qui prendra sa référence dans la palette. Pour le blanc c'est : 01, le bleu c'est: 02 et le vert c'est: 03.
 
-    Les 6 premiers bit de l'image correspond à la palette de couleur (00 00 00 00 00 00 ).
-    Ensuite nous pouvons voir que nous commençons par mettre deux pixels blanc avec(02 00) un pixel bleu (01 02) et un autre pixel blanc (00 00) puis nous faison un saut de ligne (00 00) (Fin premiére ligne).
+    Les 6 premiers octet de l'image correspond à la palette de couleur (00 00 00 00 00 00 ).
+    Ensuite nous pouvons voir que nous commençons par mettre deux pixels blanc avec(02 01) un pixel bleu (01 02) et un autre pixel blanc (01 01) puis nous faisons un saut de ligne (00 00) (Fin premiére ligne).
+
+voici cette ligne dans okteta: 
+
+![première ligne okteta](./screen/A10/ligne1okteta.png)
 
     Nous mettons un pixel en rouge (01 00), un pixel en vert (01 03) et deux pixel rouge (02 00) en saute une ligne (00 00) (Fin deuxième ligne)
     
     Nous metton deux pixel en vert (02 03), un pixel rouge (01 00), un pixel vert (01 03), en saute une ligne (00 00) (fin troisième ligne)
-    
-    Et sur la dernière ligne on met un pixel blanc (01 01) puis un pixel rouge(01 00) un pixel blanc (01 01) et un dernier pixel rouge (01 00) et ,ous fermons le fichier avec (00 00 00 01).
+
+Voici la ligne 3 dans okteta:
+
+![ligne 3 okteta](./screen/A10/ligne3.png)
+
+    Et sur la dernière ligne on met un pixel blanc (01 01) puis un pixel rouge(01 00) un pixel blanc (01 01) et un dernier pixel rouge (01 00) et nous fermons le fichier avec (00 00 00 01).
 
 Et nous allons obtenir cette image:
 
-![image de l'exo A10](./screen/A10/A10_imagefin.png "image A10 ")
+![image de fin l'exo A10](./screen/A10/A10_imagefin.png )
 
     Dans la seconde partie de l'exercice il nous est demandé de supprimé les couleurs inutiles dans la palette de couleur est de l'enregistrer dans un fichier nommé Image 9.bmp
-    Notre image 8 fait 1114 octet lorsque nous supprimons les couleurs inutiles dans la palette Il ne reste plus que 106 octets.
+    Notre image 8 fait 1114 octets, lorsque nous supprimons les couleurs inutiles dans la palette Il ne reste plus que 106 octets.
 
-![image de l'exo A10](./screen/A10/A10_part2.png "comparaison de taille aprés avoir enlever les couleurs de la palette ")
+![comparaison de taille aprés avoir enlever les couleurs de la palette ](./screen/A10/A10_part2.png )
 
     voici à quoi resemble le fichier okteta de l'image 9 avec une palette trés réduite:
-![image de l'exo A10](./screen/A10/A10_part2_okteta_image9.png "fichier okteta de l'image 9.bmp ")
+![fichier okteta de l'image 9.bmp ](./screen/A10/A10_part2_okteta_image9.png )
 
+    Alors que voici une petite partie du fichier de l'image 8:
+![fichier okteta de l'image 8.bmp ](./screen/A10/oktetaimage8.png)
+
+    La différence est énorme.
 
 # PARTIE B:
 
 ## EXERCICE B1) 
-![code de l'exo B10](./screen/B1/b1_code.png "code B1 ")
+![code de l'exo B1](./screen/B1/b1_code.png )
 
     Je commence par ouvrir mon fichier dans une variable nommé mon_image (ligne 3-5)
     Je crée un fonction pour tourner mon image:
@@ -377,16 +444,16 @@ Et nous allons obtenir cette image:
 
 Voici l'image test de départ:
 
-![code de l'exo B1](./screen/B1/Imagetest_avant_code.png "image B1 avant le passage du code ")
+![image B1 avant le passage du code ](./screen/B1/Imagetest_avant_code.png )
 
 Voici la même image aprés le passage du code:
 
-![code de l'exo B1](./screen/B1/Imagetest_apres_code.png.png "image B1 apres le passage du code ")
+![image B1 apres le passage du code ](./screen/B1/Imagetest_apres_code.png.png )
 
 
 ## EXERCICE B2)
 
-![code de l'exo B2](./screen/B2/code_exo_B2.png "code B2 ")
+![code de l'exo B2](./screen/B2/code_exo_B2.png )
 
     Dans ce code je commence par ouvrir mon image à la ligne 3.
 
@@ -399,14 +466,14 @@ Voici la même image aprés le passage du code:
 
 Voici l'image de départ:  
 
-![code de l'exo B2](./codeB2_et_image/hall-mod_0.bmp "image avant le passage du code B2 ")
+![image avant le passage du code B2 ](./codeB2_et_image/hall-mod_0.bmp )
 
 Voici l'image obtenu aprés le code: 
 
-![code de l'exo B2](./codeB2_et_image/Imageout1.bmp "image apres le passage du code B2 ")
+![image apres le passage du code B2 ](./codeB2_et_image/Imageout1.bmp )
 
 ## EXERCICE B3)
-![code de l'exo B3](./screen/B3/code_b3.png "code B3 ")
+![code de l'exo B3](./screen/B3/code_b3.png )
 
     J'ouvre mon image à la ligne 3.
 
@@ -423,17 +490,17 @@ Voici l'image obtenu aprés le code:
 
 Voici mon image de départ: 
 
-![code de l'exo B3](./codeB2_et_image/IUT-Orleans.bmp "image avant le passage du code B3 ")
+![image avant le passage du code B3 ](./codeB2_et_image/IUT-Orleans.bmp )
 
 Voici l'image aprés le code:
 
-![code de l'exo B3](./codeB2_et_image/Imageout2.bmp "image apres le passage du code B3 ")
+![image apres le passage du code B3 ](./codeB2_et_image/Imageout2.bmp )
 
 Nous pouvons bien voir que nos pixels sont grisé.
 
 ## EXERCICE B4)
 
-![code de l'exo B4](./screen/B4/code_b4.png "code B4 ")
+![code de l'exo B4](./screen/B4/code_b4.png )
 
     J'ouvre l'image demandé.
     
@@ -455,11 +522,11 @@ Nous pouvons bien voir que nos pixels sont grisé.
 
 Voici mon image de départ: 
 
-![code de l'exo B4](./codeB2_et_image/IUT-Orleans.bmp "image avant le passage du code B4 ")
+![image avant le passage du code B4 ](./codeB2_et_image/IUT-Orleans.bmp )
 
 Voici l'image aprés le code:
 
-![code de l'exo B4](./codeB2_et_image/Imageout3.bmp "image apres le passage du code B4 ")
+![image apres le passage du code B4 ](./codeB2_et_image/Imageout3.bmp )
 
 ## EXERCICE B5)
 
@@ -467,7 +534,7 @@ Voici l'image aprés le code:
 
 ### Partie 1:
     
-![code de l'exo B5](./screen/B5/code_liber_placeB5.png "code qui permet de liber de la place dans l'image")
+![code qui permet de liber de la place dans l'image](./screen/B5/code_liber_placeB5.png )
 
     Je commence par créé deux fonction qui vont nous permettre de cacher et de retrouver l'image caché ( je vais utiliser c'est ces deux fonction dans les deux procaine partie).
 
@@ -479,11 +546,11 @@ Voici l'image aprés le code:
 
 Voici l'image avant le code:
 
-![code de l'exo B5](./codeB2_et_image/hall-mod_0.bmp "image avant le code liberer")
+![image avant le code liberer](./codeB2_et_image/hall-mod_0.bmp )
 
 Voici l'image aprés le code libere:
 
-![code de l'exo B5](./codeB2_et_image/Imageout_steg_0.bmp "image apres le code liberer")
+![image apres le code liberer](./codeB2_et_image/Imageout_steg_0.bmp )
 
 A l'oeil nu l'Humain ne voit aucune différence entre ces deux images.
 
@@ -491,11 +558,11 @@ A l'oeil nu l'Humain ne voit aucune différence entre ces deux images.
 
     Dans cette partie je vait utiliser le code cacher pour cacher une image dans un autre.
 
-![code de l'exo B5](./screen/B5/code_cacher_imageB5.png "code pour cacher une image")
+![code pour cacher une image](./screen/B5/code_cacher_imageB5.png )
 #
 #
 fonction cacher:
-![code de l'exo B5](./screen/B5/fonction_cacher.png "code fonction cacher")
+![code fonction cacher](./screen/B5/fonction_cacher.png )
 
     Dans cette fonction je vais parcourir mon image à cacher que j'ai nommé image_a_cacher. (Je parcoure cette image car elle est plus petite que l'image pricipale, de plus si l'image à cacher était plus grande cela ne fonctionnerait pas.) 
     
@@ -509,11 +576,11 @@ fonction cacher:
 
 Voici l'image de départ:
 
-![code de l'exo B5](./codeB2_et_image/Imageout_steg_0.bmp "image avant le code de la finction cacher une image")
+![image avant le code de la finction cacher une image](./codeB2_et_image/Imageout_steg_0.bmp )
 
 Voici l'image de fin:
 
-![code de l'exo B5](./codeB2_et_image/Imageout_steg_1.bmp "image apres le code de la fonction cacher une image")
+![image apres le code de la fonction cacher une image](./codeB2_et_image/Imageout_steg_1.bmp )
 
 Vous ne voyez toujours pas de différence à l'oeil nu attendez la paartie 3 pour voir ce qu'il y a dans cette image.
 
@@ -521,11 +588,11 @@ Vous ne voyez toujours pas de différence à l'oeil nu attendez la paartie 3 pou
 ### Partie 3:
 
 Dans cette partie je vait utiliser la fonction trouver: 
-![code de l'exo B5](./screen/B5/fonction_trouver.png "code trouver")
+![code trouver](./screen/B5/fonction_trouver.png )
 
 Et je vait utiliser ma fonction retrouver une image cacher:
 
-![code de l'exo B5](./screen/B5/code_retrouver_imageB5.png "code retrouver une image cacher")
+![code retrouver une image cacher](./screen/B5/code_retrouver_imageB5.png )
 
     Dans cette fonction je parcoure mon image et je récupère le code RVB des pixels de l'image. (ligne 64-67) 
 
@@ -537,11 +604,11 @@ Et je vait utiliser ma fonction retrouver une image cacher:
 
 Voici l'image que nous avons au début:
 
-![code de l'exo B5](./codeB2_et_image/Imageout_steg_1.bmp "image apres le code de la fonction cacher une image")
+![image apres le code de la fonction cacher une image](./codeB2_et_image/Imageout_steg_1.bmp )
 
 Et voici l'image qui était cacher à l'interieur:
 
-![code de l'exo B5](./codeB2_et_image/ImageB5_qui_etait_cacher.bmp "image apres le code de la fonction cacher une image")
+![image apres le code de la fonction cacher une image](./codeB2_et_image/ImageB5_qui_etait_cacher.bmp )
 
 Maintenant à l'oeil nu nous pouvons voir ce qui était cacher.
 
@@ -555,19 +622,19 @@ Maintenant à l'oeil nu nous pouvons voir ce qui était cacher.
     La fonction liber place permet de degrader le pixel rouge d'un chiffre si il est impaire.
 
 
-![code de l'exo B6](./screen/B6/meme_code_b5.png "image des codes que l'on va reutiliser")
+![image des codes que l'on va reutiliser](./screen/B6/meme_code_b5.png )
 
     J'ai enregistrer le fichier avec la couleur rouge degrader sous le nom de: Image_steg_out0_partie_b6.bmp
     J'ai crée une fonction pour cacher mon image.
     J'ai diviser cette fonction en deux partie:
 
-![code de l'exo B6](./screen/B6/cacher_text_part1.png "Image du code ccher_texte partie 1")
+![Image du code ccher_texte partie 1](./screen/B6/cacher_text_part1.png )
 
     Dans cette partie du code je commence par parcourir mes lettre dans mon mot que je vais cache. 
     Avec la ligne 3: "".join("{:08b}".format(ord(lettre)))
     Il permet de mettre une lettre du mot en binaire sur 1 octet dans une chaine de caractere (la fonction ord permet de mettre une lettre en decimal avec la table ASCII). Puis avec la ligne 4 je place chaque bit dans la liste.
     Voici La partie une ce code.
-![code de l'exo B6](./screen/B6/cacher_text_part2.png "Image du code ccher_texte partie 2")
+![Image du code ccher_texte partie 2](./screen/B6/cacher_text_part2.png )
 
     Dans cette partie je parcour mon image avec un degrader de couleur rouge, je recupere chaque pixel dans une variable.
     Si le chiffre de ma liste de binaire vaut 1 alors je le cache dans la couleur rouge de mon image avec un nombre imapire.
@@ -579,15 +646,15 @@ Maintenant à l'oeil nu nous pouvons voir ce qui était cacher.
 
 
 Voici mon code en entier:
-![code de l'exo B6](./screen/B6/cacher_text.png "Image du code cacher_texte")
+![Image du code cacher_texte](./screen/B6/cacher_text.png )
 
 J'appel cette fonction de cette maniere.
 
-![code de l'exo B6](./screen/B6/enregistrment_cacher_texte.png "Image du code cacher_texte")
+![Image du code cacher_texte](./screen/B6/enregistrment_cacher_texte.png )
 
     Voici mon code pour retrouver mon image:
 
-![code de l'exo B6](./screen/B6/fonction_retrouver_image.png "Image du code retrouver_texte")
+![Image du code retrouver_texte](./screen/B6/fonction_retrouver_image.png )
 
     Dans cette fonction je commence par parcourir mon image et récuperer le code RVB de chaque pixel dans une variable.
     Puis je verifie avec la fonction trouver (qui à été donné) si le pixel est impair ou pair (si il vaut 0 ou 1) et je l'ajoute dans une liste.
@@ -600,22 +667,22 @@ Le mot que j'ai caché est: Bonus
 
 Voici l'image avant tout modification:
 
-![code de l'exo B6](./codeB2_et_image/hall-mod_0.bmp "mot que l'on a caché")
+![mot que l'on a caché](./codeB2_et_image/hall-mod_0.bmp )
 
 
 Voici l'image aprés le degrader de couleur rouge:
 
-![code de l'exo B6](./codeB2_et_image/Imageout_steg_0.bmp "mot que l'on a caché")
+![mot que l'on a caché](./codeB2_et_image/Imageout_steg_0.bmp )
 
 
 Voici l'image dans lequel nous avons caché le texte:
 
-![code de l'exo B6](./codeB2_et_image/Imageout_steg_out1_partie_b6.bmp "mot que l'on a caché")
+![mot que l'on a caché](./codeB2_et_image/Imageout_steg_out1_partie_b6.bmp )
 
 
 Voici le message que j'ai retrouver (c'est le même que j'ai caché):
 
-![code de l'exo B6](./screen/B6/message_cache.png "mot que l'on a caché")
+![mot que l'on a caché](./screen/B6/message_cache.png )
 
 
 ## EXERCICE B7)
