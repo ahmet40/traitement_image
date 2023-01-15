@@ -242,7 +242,19 @@ ET voici le resultat:
 
     13) Le tableau de pixel commence à l'adresse 0x76. Cette adresse est donné à l'adresse 0x0A sur 4 octets.
 
-    
+    14)
+
+![image de l'exo A4_14](./screen/A4/A4_14/okteta14.png)
+
+    Voici le fichier vu sous okteta. Nous pouvons voir qu'à l'adresse 0x76 et jusqu'à l'adresse 0x7B je place des B pour mettre du bleu cela correspond à l'index 11 dasn la palette de couleur.
+    Voici la ligne de bleu que cela me fait:
+
+![ligne bleu](./screen/A4/A4_14/lignebleu.png)
+
+    Et en un peu plus grand:
+
+![ligne bleu](./screen/A4/A4_14/image.png)
+
     15) Lorsque l'on diminue le nombre de couleurs dans la palette l'image est plus pixelisé. 
 
     Voici se à quoi elle ressemble:
