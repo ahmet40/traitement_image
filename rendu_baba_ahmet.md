@@ -389,6 +389,7 @@ Voici le codage des pixel vu par okteta:
 
 ![image code A10](./screen/A10/A10_code.png )
 
+    Petit rappel:
     Pour mettre la valeur rouge on entre 00 qui prendra sa référence dans la palette. Pour le blanc c'est : 01, le bleu c'est: 02 et le vert c'est: 03.
 
     Les 6 premiers octet de l'image correspond à la palette de couleur (00 00 00 00 00 00 ).
@@ -435,12 +436,12 @@ Et nous allons obtenir cette image:
     Je commence par copier mon image dans une variable nommé sortie (ligne 8)
 
     Puis je parcour les pixels de mon image i (avec mes deux boucle for). (ligne 19-21)
-    Je recupére le code rvb du pixel de mon image i et le stock dans la variable c (c pour couleur) avec c=i.getpixel((x,y))
+    Je recupère le code rvb du pixel de mon image i et le stock dans la variable c (c pour couleur) avec c=i.getpixel((x,y))
     (ligne 22)
 
-    Puis je fait la transposé de mon image, c'est a dire que j'inverse les ligne et les colonnes pour obtenir l'image demandé. J'utilise cela pour ce faire sortie.putpixel((y,x),c) (je change le pixel de la position colonne ligne à la position ligne colonne). Je change donc les pixels de mon image de sortie. (ligne 25)
+    Puis je fait la transposé de mon image, c'est a dire que j'inverse les lignes et les colonnes pour obtenir l'image demandé. Pour ce faire j'utilise: sortie.putpixel((y,x),c) (je change le pixel de la position colonne ligne à la position ligne colonne). Je change donc les pixels de ligne et de colonne de mon image de sortie. (ligne 25)
 
-    Puis j'enregistre ce fichier à la postion de sortie que l'utilisateur va indiquer (personnelement je l'enregistre dans le repertoire courant codeb2_et_image sous le nom de Imageou0.bmp)
+    Puis j'enregistre ce fichier à la position de sortie que l'utilisateur va indiquer (personnelement je l'enregistre dans le repertoire courant codeb2_et_image sous le nom de Imageou0.bmp)
 
 Voici l'image test de départ:
 
@@ -458,19 +459,21 @@ Voici la même image aprés le passage du code:
     Dans ce code je commence par ouvrir mon image à la ligne 3.
 
     Pour faire ce qui est demandé je vais crée une fonction qui prend en parametre une image bmp et un chemin pour enregistrer la nouvelle image.
-    Je commence par copier mon image bmp (ligne 15) et j'enregistre le longueur de mon image dans une variable nommé width (ligne 16).
-    Ensuite je parcours mon image par c'est pixels. je récuper le code RVB dans la variable c (ligne 21) et je vais changée les pixels de la fin de ma ligne et sur la meme colonne par le pixels de la ligne du début.
+    Je commence par copier mon image bmp (ligne 15) et j'enregistre la largeur de mon image dans une variable nommé width (ligne 16).
+    Ensuite je parcours mon image par ces lignes et colonnes pour obtenir les pixels. je récupère le code RVB dans la variable c (ligne 21) et je vais changée les pixels de la fin de ma ligne et sur la meme colonne par le pixels de la ligne du début (ligne 24).
     
-    Exemple: si mon image fait 10 pixel de longueur je prend le premier pixel et dans mon image copier je change le 10éme  pixel par le premier que j'ai récuperer.
+    Exemple: si mon image fait 10 pixel de largeur je prend le premier pixel et dans mon image copier je change le 10éme  pixel par le premier que j'ai récuperer.
     (le pixel 1 devient le pixel 10 dans mon image copie).
+
+    
 
 Voici l'image de départ:  
 
-![image avant le passage du code B2 ](./codeB2_et_image/hall-mod_0.bmp )
+![image avant le passage du code B2 ](./screen/B2/screen_hall_mod_0.png )
 
 Voici l'image obtenu aprés le code: 
 
-![image apres le passage du code B2 ](./codeB2_et_image/Imageout1.bmp )
+![image apres le passage du code B2 ](./screen/B2/screen_imageout1.png)
 
 ## EXERCICE B3)
 ![code de l'exo B3](./screen/B3/code_b3.png )
@@ -478,7 +481,7 @@ Voici l'image obtenu aprés le code:
     J'ouvre mon image à la ligne 3.
 
     Je vais crée une fonction niveau de gris pour faire ce qui est demandé.
-    A cette fonction nous allons lui attribué deux parmaétre celui de l'image dans une varable nommé i et un chemin pour le repertoire de sortie.
+    A cette fonction nous allons lui attribué deux paramètre celui de l'image dans une varable nommé i et un chemin pour le répèrtoire de sortie.
 
     Dans cette fonction je commence par copié mon image dans une variable nommé sortie. (à la ligne 13)
     Puis je parcours mon image i et je récupere le code rvb de chacun des pixels dans une variable c.( ligne 17-18)
@@ -486,15 +489,15 @@ Voici l'image obtenu aprés le code:
     Pour mettre un pixel en niveau de gris nous allons utilisé la formule donné qui est : (rouge + vert + bleu)/3
     Dans la ligne 19 j'utilise cette formule est je le met dans une variable nv_col.
 
-    Puis dans le copie je change le code RVB des pixels par le code RVB que j'ai obtenu avec le niveau de gris.
+    Puis dans le l'image copié je change le code RVB des pixels par le code RVB que j'ai obtenu avec le niveau de gris (ligne 20). 
 
 Voici mon image de départ: 
 
-![image avant le passage du code B3 ](./codeB2_et_image/IUT-Orleans.bmp )
+![image avant le passage du code B3 ](./screen/B3/iutorleans.png )
 
 Voici l'image aprés le code:
 
-![image apres le passage du code B3 ](./codeB2_et_image/Imageout2.bmp )
+![image apres le passage du code B3 ](./screen/B3/iutorleansaprescode.png)
 
 Nous pouvons bien voir que nos pixels sont grisé.
 
@@ -502,7 +505,7 @@ Nous pouvons bien voir que nos pixels sont grisé.
 
 ![code de l'exo B4](./screen/B4/code_b4.png )
 
-    J'ouvre l'image demandé.
+    J'ouvre l'image demandé (ligne 3).
     
     Pour mettre mon image en noir et blanc je commence par crée une fonction qui prend deux parametre: l'image et le repertoire de sortie.
 
@@ -511,9 +514,8 @@ Nous pouvons bien voir que nos pixels sont grisé.
     Je parcour mon image et je prend le code RVB dans une variable c.
 
     La formule pour mettre le pixel en noir ou en blanc c'est:
-    (Rouge² + Vert² + Bleu²), c'est notre ligne 19 et on le met dans une variable nommé nv_col.
-    Ensuite on verifie si nv_col est supérieur à 255*255*3/2
-    alors le pixel sera blanc et on va le changer (ligne 21).
+    (Rouge² + Vert² + Bleu²), dans la  ligne 19 j'utilise cette formule et le place dans une variable nommé nv_col.
+    Ensuite on vérifie. Si nv_col est supérieur à 255*255*3/2 (cette formule est aussi donné) alors le pixel sera blanc et on va le changer dans l'image copié (ligne 21).
     Sinon le pixel sera noir et on va le changer (ligne 23).
 
     Ps: si le pixel est blanc son code RVB est: 255, 255, 255
@@ -522,15 +524,15 @@ Nous pouvons bien voir que nos pixels sont grisé.
 
 Voici mon image de départ: 
 
-![image avant le passage du code B4 ](./codeB2_et_image/IUT-Orleans.bmp )
+![image avant le passage du code B4 ](./screen/B3/iutorleans.png )
 
 Voici l'image aprés le code:
 
-![image apres le passage du code B4 ](./codeB2_et_image/Imageout3.bmp )
+![image apres le passage du code B4 ](./screen/B4/imagenoiretblanc.png)
 
 ## EXERCICE B5)
 
-    Pour cette exercice nous allons diviser les question en 3 partie, 3 fonctions. Dans la première partie nous allons libere de la place dans nos pixels pour pouvoir mettre une deuxiéme image. Dans la seconde partie nous allons cacher une image dans une image et dans la troisème partie nous allons retrouver l'image que nous avons cacher.
+    Pour cette exercice nous allons diviser les questions en 3 partie, 3 fonctions. Dans la première partie nous allons liberer de la place dans nos pixels pour pouvoir mettre une deuxiéme image. Dans la seconde partie nous allons cacher une image dans une image et dans la troisème partie nous allons retrouver l'image que nous avons cacher.
 
 ### Partie 1:
     
@@ -539,18 +541,20 @@ Voici l'image aprés le code:
     Je commence par créé deux fonction qui vont nous permettre de cacher et de retrouver l'image caché ( je vais utiliser c'est ces deux fonction dans les deux procaine partie).
 
     Pour liberer de la place je commence par parcourir mon image et de mettre le code RVB des pixels dans une variable c. (ligne 17-20)
-    Ensuite dans valeur_r je soustrait à la valeur rouge le reste de la division par deux de cette valeur. 
-    (Rouge = Rouge - Rouge%2) Je le fait à la ligne 21.
+    Ensuite dans valeur_r je soustrait à la valeur rouge (le rouge est la couleur la moin utilisé dans cette image) le reste de la division par deux de cette valeur. 
+    (Rouge = Rouge - Rouge%2) Je le fait à la ligne 21. 
+    Donc si la couleur rouge avait une valeur paire elle reste le même mais si cette valeur est impair on soustrait 1 à cette valeur pour qu'il soit pair.
+    Cela va nous permettre de cacher et retrouver les pixels de l'image.
     
-    Et Je l'enregistre dans un fichier nommé Imageout_steg_0.bmp
+    J'enregistre ce fichier et je le nomme Imageout_steg_0.bmp
 
 Voici l'image avant le code:
 
-![image avant le code liberer](./codeB2_et_image/hall-mod_0.bmp )
+![image avant le code liberer](./screen/B2/screen_hall_mod_0.png )
 
 Voici l'image aprés le code libere:
 
-![image apres le code liberer](./codeB2_et_image/Imageout_steg_0.bmp )
+![image apres le code liberer](./screen/B5/stegout0.png)
 
 A l'oeil nu l'Humain ne voit aucune différence entre ces deux images.
 
@@ -558,29 +562,31 @@ A l'oeil nu l'Humain ne voit aucune différence entre ces deux images.
 
     Dans cette partie je vait utiliser le code cacher pour cacher une image dans un autre.
 
-![code pour cacher une image](./screen/B5/code_cacher_imageB5.png )
-#
-#
-fonction cacher:
+La fonction cacher donné pour l'exercice:
 ![code fonction cacher](./screen/B5/fonction_cacher.png )
+
+Et voici ma fonction qui va me permettre de cacher une image:
+![code pour cacher une image](./screen/B5/code_cacher_imageB5.png )
+
+
 
     Dans cette fonction je vais parcourir mon image à cacher que j'ai nommé image_a_cacher. (Je parcoure cette image car elle est plus petite que l'image pricipale, de plus si l'image à cacher était plus grande cela ne fonctionnerait pas.) 
     
-    Je récupere les pixels de mon image pricipale et de mon image à cacher. (ligne 41-42)
+    Je récupere les pixels de mon image pricipale et de mon image à cacher dans les variables c et c1. (ligne 41-42)
     Ensuite j'utilise la même formule que l'Exercice 4 pour vérifier si le pixel de l'image à cacher sera noir ou blanc.
     
-    Si il est blanc je le cache avec une valeur de b=1 dans ma fonction caher. (LA couleur rouge du pixel sera un nombre impair cela va nous aider à retrouver notre image dans la partie 3)
+    Si il est blanc j'utilise la fonction cacher et je le cache avec une valeur de b=1 dans ma fonction caher. (LA couleur rouge du pixel sera un nombre impair cela va nous aider à retrouver notre image dans la partie 3)
     Si il est noir je le cache avec une valeur de b=0 dans ma fonction caher.(LA couleur rouge du pixel sera un nombre pair cela va nous aider à retrouver notre image dans la partie 3).
     
-    Et je finit par le changer dans moi image de sortie. (ligne 45 et 47)
+    Et je finit par le changer dans mon image de sortie. (ligne 45 et 47)
 
 Voici l'image de départ:
 
-![image avant le code de la finction cacher une image](./codeB2_et_image/Imageout_steg_0.bmp )
+![image avant le code de la finction cacher une image](./screen/B5/stegout0.png )
 
 Voici l'image de fin:
 
-![image apres le code de la fonction cacher une image](./codeB2_et_image/Imageout_steg_1.bmp )
+![image apres le code de la fonction cacher une image](./screen/B5/steg1.png)
 
 Vous ne voyez toujours pas de différence à l'oeil nu attendez la paartie 3 pour voir ce qu'il y a dans cette image.
 
@@ -594,21 +600,21 @@ Et je vait utiliser ma fonction retrouver une image cacher:
 
 ![code retrouver une image cacher](./screen/B5/code_retrouver_imageB5.png )
 
-    Dans cette fonction je parcoure mon image et je récupère le code RVB des pixels de l'image. (ligne 64-67) 
+    Dans cette fonction je parcour mon image et je récupère le code RVB des pixels de l'image. (ligne 64-67) 
 
-    Par la suite je regarde si la couleur rouge du pixel est pair ou impair. Si il est pare c'est que le pixel est de couleur noir. Alors je vait changer le pixel de l'image de sortie en couleur noir.
-    Si il est impaire c'est que le pixel est de couleur blanche.Alors je vait changer le pixel de l'image de sortie en couleur blanc.
+    Par la suite je regarde si la couleur rouge du pixel est pair ou impair. Si il est pair c'est que le pixel est de couleur noir. Alors je vait changer le pixel de l'image de sortie en couleur noir (le code rvb de la couleur noir est: 00 00 00).
+    Si il est impaire c'est que le pixel est de couleur blanche. Alors je vait changer le pixel de l'image de sortie en couleur blanc ( code RVB de la couleur blanche est: 255 255 255).
 
     Et grace à ce code je vait obtenir mon image que j'avais cacher au départ.
 
 
 Voici l'image que nous avons au début:
 
-![image apres le code de la fonction cacher une image](./codeB2_et_image/Imageout_steg_1.bmp )
+![image apres le code de la fonction cacher une image](./screen/B5/steg1.png )
 
 Et voici l'image qui était cacher à l'interieur:
 
-![image apres le code de la fonction cacher une image](./codeB2_et_image/ImageB5_qui_etait_cacher.bmp )
+![image apres le code de la fonction cacher une image](./screen/B5/imagecache.png )
 
 Maintenant à l'oeil nu nous pouvons voir ce qui était cacher.
 
@@ -617,9 +623,9 @@ Maintenant à l'oeil nu nous pouvons voir ce qui était cacher.
 ## EXERCICE B6)
 
     Dans cette exercice il nous est demandé de caché du texte dans une image.
-    Au début npous commençons par faire les même fonction que l'exercice B5.
+    Au début nous commençons par faire les mêmes fonctions que l'exercice B5.
     Nous allons copier les fonctions cacher, trouver et libere_place.
-    La fonction liber place permet de degrader le pixel rouge d'un chiffre si il est impaire.
+    Rapellons-nous que la fonction liberer place permet de degrader le pixel rouge (la couleur la moin utilisé) d'un chiffre si il est impair.
 
 
 ![image des codes que l'on va reutiliser](./screen/B6/meme_code_b5.png )
@@ -630,16 +636,24 @@ Maintenant à l'oeil nu nous pouvons voir ce qui était cacher.
 
 ![Image du code ccher_texte partie 1](./screen/B6/cacher_text_part1.png )
 
-    Dans cette partie du code je commence par parcourir mes lettre dans mon mot que je vais cache. 
-    Avec la ligne 3: "".join("{:08b}".format(ord(lettre)))
-    Il permet de mettre une lettre du mot en binaire sur 1 octet dans une chaine de caractere (la fonction ord permet de mettre une lettre en decimal avec la table ASCII). Puis avec la ligne 4 je place chaque bit dans la liste.
-    Voici La partie une ce code.
+    Dans cette partie du code je commence par parcourir mes lettres de mon mot que je vais caché. 
+    La ligne 3: "".join("{:08b}".format(ord(lettre))).
+    La fonction ord permet de mettre une lettre en decimal avec la table ASCII.
+    Puis nous allons mettre ce chiffre decimal en binaire sur 1 octet dans une chaine de caractere . 
+    Puis avec la ligne 4 je place chaque bit de ma lettre dans la liste.
+    Voici donc un exemple de ce que fait la partie une de ce code.
+
+![exemple mot ](./screen/B6/exemple_mot.png )
+
+    Nous pouvons voir que le mot jeu à été coder sur 3 octet en binaire.
+
+#
 ![Image du code ccher_texte partie 2](./screen/B6/cacher_text_part2.png )
 
-    Dans cette partie je parcour mon image avec un degrader de couleur rouge, je recupere chaque pixel dans une variable.
-    Si le chiffre de ma liste de binaire vaut 1 alors je le cache dans la couleur rouge de mon image avec un nombre imapire.
+    Dans cette partie je parcour mon image avec un degrader de couleur rouge, je recupere le code RVB de chaque pixel dans une variable.
+    Si le chiffre de ma liste binaire vaut 1 alors je le cache dans la couleur rouge de mon image avec un nombre impair.
     Sinon je le cache avec nombre pair.
-    Puis dans mon dernier if, verifie que je ne sorte pas de la liste pour ne pas savoir d'erreur. Si j'attent le dernier bit de ma liste alors j'enregistre mon fichier de sortie et je quitte ma fonction.
+    Puis dans mon dernier if, je verifie que je ne sort pas de la liste pour ne pas savoir d'erreur. Si j'atteint le dernier bit de ma liste alors j'enregistre mon fichier de sortie et je quitte ma fonction.
     J'enregistre se fichier sous le nom de Image_steg_out1_partie_b6.bmp
 
 
@@ -658,8 +672,10 @@ J'appel cette fonction de cette maniere.
 
     Dans cette fonction je commence par parcourir mon image et récuperer le code RVB de chaque pixel dans une variable.
     Puis je verifie avec la fonction trouver (qui à été donné) si le pixel est impair ou pair (si il vaut 0 ou 1) et je l'ajoute dans une liste.
-    Une fois avoir atteint 1 octet je parcours ma liste. Pour chaque 1 dans ma liste je le convertit en decimal.
-    Une fois avoir eu tout les bit de ma liste je convertit mon nombre decimal en une lettre ASCII (grace à la fonction chr).
+    Une fois avoir atteint 1 octet c'est à dire 8 bit, je commence par verfier si ma liste n'est pas une suite de 0 car huit 0 dans une liste veut dire que les lettres de mon mots sont terminé et donc je vait arreter le parcour de pixel et vait afficher le mot. Sinon je parcour ma liste. Pour chaque bit dans ma liste je prend la valeur et le met en puissance de deux pour obtenir mon octet binaire en decimal (ligne 91-92). 
+    Exemple si ma liste vaut [0 0 0 0 0 0 1 1] je vait faire 1*2⁰ + 1*2² qui v a me faire 3.
+
+    Une fois avoir eu tout les bits de ma liste je converti mon nombre decimal en une lettre ASCII (grace à la fonction chr).
     Et j'affiche ce resultat.
 
 
@@ -667,17 +683,17 @@ Le mot que j'ai caché est: Bonus
 
 Voici l'image avant tout modification:
 
-![mot que l'on a caché](./codeB2_et_image/hall-mod_0.bmp )
+![mot que l'on a caché](./screen/B2/screen_hall_mod_0.png )
 
 
 Voici l'image aprés le degrader de couleur rouge:
 
-![mot que l'on a caché](./codeB2_et_image/Imageout_steg_0.bmp )
+![mot que l'on a caché](./screen/B6/imagesteg0.png )
 
 
 Voici l'image dans lequel nous avons caché le texte:
 
-![mot que l'on a caché](./codeB2_et_image/Imageout_steg_out1_partie_b6.bmp )
+![mot que l'on a caché](./screen/B6/steg1.png)
 
 
 Voici le message que j'ai retrouver (c'est le même que j'ai caché):
@@ -729,7 +745,7 @@ Voici le message que j'ai retrouver (c'est le même que j'ai caché):
 ![code de vernam](./screen/B8/code_vernam.png)
 
     Je commence par crée une fonction dans laquelle je demande à l'utilisateur d'entrer son mot à cacher.
-    Par la suite je crée un dictionnaire dans lequelle les clé sont les lettre de l'alphabet et les valeur leur indices (exemple la a à pour indice le 0, le b c'est le 1 ...). Ensuite je parcours mon mot à cacher et pour chaque lettre je demande à l'ordinateur de me donner une lettre de la table ASCII et je met cette lettre en petit car il peut donner aussi des grandes lettre (ligne 13-15).
+    Par la suite je crée un dictionnaire dans lequelle les clés sont les lettres de l'alphabet et les valeurs leur indices (exemple la lettre a à pour indice le 0, le b  le 1 ...). Ensuite je parcours mon mot à cacher et pour chaque lettre je demande à l'ordinateur de me donner une lettre de la table ASCII et je met cette lettre en petit car il peut donner aussi des lettres majuscule (ligne 13-15).
 
     Puis je reparcours mon mot (ligne 19). J'additionne l'indice de la lettre du mot avec celle de la cle et je met cette valeur modulo 26 et j'obtient l'indice de ma future lettre(ligne 22-23) . 
     Ensuite je parcour mon dictionnaire de lettre et je prend la lettre qui correspond à l'indice que j'ai calculé juste avant et j'arrete le parcour de mon dictionnaire. 
@@ -742,8 +758,8 @@ Voici le message que j'ai retrouver (c'est le même que j'ai caché):
 
     Nous pouvons voir que j'ai appelé ma fonction deux fois et que j'ai eu deux mot different car j'utiliser bien des clef aléatoire.
 
-    Pour la suite je reutilise les deux code libere_place et cacher_texte de la question B6:
-    Nous rappelons que le code liberer_place permet de degrader un pixel de couleur rouge à un chiffre paire en dessous et que le code cacher_texte permet de placer le texte dans une image.  
+    Pour la suite je reutilise les deux codes libere_place et cacher_texte de la question B6:
+    Nous rappelons que le code liberer_place permet de degrader le pixel de couleur rouge (couleur la moin presente) à un chiffre paire en dessous et que le code cacher_texte permet de placer le texte dans une image.  
 
     Voici le code liberer_place et celui de cacher_texte:
 
@@ -751,7 +767,7 @@ Voici le message que j'ai retrouver (c'est le même que j'ai caché):
 
 ![code cacher_texte](./screen/B8/code_cacher_texte.png)
 
-    Maintenant mon mot avec le code de VERNAM est caché dans l'image comment faire pour le retrouver ? Pour le retrouver nous allons modifié un tout petit peut le code de retrouver texte de la question B6.
+    Maintenant mon mot avec le code de VERNAM est caché dans l'image, comment faire pour le retrouver ? Pour le retrouver nous allons modifié un tout petit peut le code de retrouver texte de la question B6.
 
     Voici le code:
 
@@ -761,13 +777,14 @@ Voici le message que j'ai retrouver (c'est le même que j'ai caché):
 
 ![ligne qui le differencie de la question B6](./screen/B8/ligne_qui_change_retrouver_texte.png)
 
-    Nous pouvons voir que dans cette ligne j'appele la fonction qui va nous permettre de retrouver le mot de depart grace à sa clef. Si je n'appele pas cette fonction le code va me retourner le mot qui à été code avec VERNAME.
+    Nous pouvons voir que dans cette ligne j'appele la fonction qui va nous permettre de retrouver le mot de depart grace à sa clef. Si je n'appele pas cette fonction le code va me retourner le mot qui à été codé avec une clef aleatoire.
 
-    Voici le code qui va me permet donc de retrouver le mot de départ:
+    Voici le code qui va me permettre donc de retrouver le mot de départ:
 
 ![code pour retrouver le message de depart](./screen/B8/code_retrouver_vernam.png)
 
-    La difference qui nous permet de retrouver le mot de départ est la ligne: 38 car au lieu d'additionner les valeurs je les soustrait pour obtenir la lettre du mot de depart.
+    Vous pouvez voir que la fonction cacher de vernam et retrouver sont trés similaire.
+    La diffèrence qui nous permet de retrouver le mot de départ est la ligne: 38 car au lieu d'additionner les valeurs je les soustrait pour obtenir la lettre du mot de depart.
     
     Ceci est donc le code de la fonction qui nous permet de retrouver notre texte de départ.
 
@@ -778,7 +795,7 @@ Voici le message que j'ai retrouver (c'est le même que j'ai caché):
 
     Je commence par appeler ma fonction liberer place (qui degrade la couleur rouge) sur l'image du hall de l'iut et j'enregistre cette nouvelle image sous le nom du fichier imageout_steg0_partie_b8.bmp (ligne 124).
 
-    Par la suite je vait demander à l'utilisateur d'entrer le mot qu'il veut cacher. Je vais recuperer le nouveau mot apres le passage du code de VERNAME et la clef qui lui a permit d'être codée. J'affiche le nouveau mot et la clef qui ma premit de le coder (ligne 126-129).
+    Par la suite je vait demander à l'utilisateur d'entrer le mot qu'il veut cacher. Je vais recuperer le nouveau mot apres le passage du code de VERNAME et la clef qui lui a permit d'être codée. J'affiche le nouveau mot et sa clefde chiffrement (ligne 126-129).
 
     Ensuite j'ouvre l'image ou j'ai degrader la couleur rouge.
     J'appele ma fonction cacher_texte qui va me permettre de placer le nouveau mot dans l'image et je vais enregistrer cette nouvelle image sous le nom de imageout_steg1_partie_b8.bmp (ligne132-133).
@@ -801,6 +818,21 @@ Voici le message que j'ai retrouver (c'est le même que j'ai caché):
 
        Et nous retrouvons bien le mot de départ grace à la fonction retouver text image et la fonction retrouver texte VERNAME.
 
+Voici mes images apres leur modification:
+
+Image de départ:
+
+![image de depart](./screen/B2/screen_hall_mod_0.png)
+
+Apres le degrader de couleur:
+
+![image apre le degrader de couleur](./screen/B8/steg0.png)
+
+Image avec le texte:
+
+![image avec le texte](./screen/B8/steg1.png)
+
+    Nous pouvons voir que cela n'affecte pas nos image.
 
 ## EXERCICE B9)
 

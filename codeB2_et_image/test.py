@@ -20,3 +20,17 @@ def code_vernam(mot_a_cacher):
     return mot_a_retourner,clef
 
 print(code_vernam("planterunefleur"))
+
+
+def mot(le_mot):
+    liste_bin_lettre=[]
+    
+    for lettre in le_mot:            #pour chaque lettre dans le mot
+        texte = "".join(["{:08b}".format(ord(lettre))])    
+        #texte = les lettres du texte que nous passons en hexadecimale via la table ASCII puis que nous convertissons en binaire sur 1 octets
+        texte = [int(chiffre) for chiffre in texte] #nous convertissont en int chaque chiffre codés en str "00000001"-> [0,0,0,0,0,0,0,1]
+        for chiffre in texte:
+            liste_bin_lettre.append(chiffre)
+    return le_mot,liste_bin_lettre
+
+print(mot("jeu"))
